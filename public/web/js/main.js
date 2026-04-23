@@ -1,9 +1,12 @@
 AOS.init();
 //  .>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>..
 
-document.getElementById("profile-icon").addEventListener("click", function () {
-  window.location.href = "login.html";
-});
+const profileIcon = document.getElementById("profile-icon");
+if (profileIcon) {
+  profileIcon.addEventListener("click", function () {
+    window.location.href = "/login";
+  });
+}
 
 document.addEventListener("DOMContentLoaded", function () {
   // استهداف جميع الأزرار
@@ -208,20 +211,29 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // تبديل القوائم المتنقلة
+  if (mobileMenuBtn && mobileMenu) {
   mobileMenuBtn.addEventListener("click", () => {
     mobileMenuBtn.classList.add("active");
-    categoriesBtn.classList.remove("active");
-    mobileMenu.style.display = "block";
-    categoriesMenu.style.display = "none";
-  });
 
+    if (categoriesBtn) categoriesBtn.classList.remove("active");
+
+    mobileMenu.style.display = "block";
+
+    if (categoriesMenu) categoriesMenu.style.display = "none";
+  });
+}
+
+if (categoriesBtn && categoriesMenu) {
   categoriesBtn.addEventListener("click", () => {
     categoriesBtn.classList.add("active");
-    mobileMenuBtn.classList.remove("active");
+
+    if (mobileMenuBtn) mobileMenuBtn.classList.remove("active");
+
     categoriesMenu.style.display = "block";
-    mobileMenu.style.display = "none";
+
+    if (mobileMenu) mobileMenu.style.display = "none";
   });
-});
+}
  
 
 let el = document.querySelector(".scroll");

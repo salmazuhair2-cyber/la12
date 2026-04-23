@@ -20,20 +20,20 @@ use Illuminate\Validation\ValidationException;
 
 class AdminController extends Controller
 {
-    function index(): View
+    public function index(): View
     {
         $data = [];
         $data['categories_count'] = Category::count();
         $data['products_count'] = Product::count();
         $data['users_count'] = User::count();
-        $data['recentOrders'] = Order::with(['items.product.role'])
-        ->latest()
-        ->take(3)
-        ->get();
-        return view('dashboard.index',$data);
+        $data['recentOrders'] = Order::with(['items.product.category'])
+            ->latest()
+            ->take(3)
+            ->get();
+        return view('dashboard.index', $data);
     }
 
-    function profile(): View
+    public function profile(): View
     {
         return view('dashboard.profile');
     }
@@ -45,13 +45,14 @@ class AdminController extends Controller
         $user->email = $request->email;
         if ($request->filled('current_password')) {
             if (!Hash::check($request->current_password, $user->password)) {
-                
+
                 return response()->json([
                     'message' => 'Current password is incorrect.',
                     'errors' => [
                         'current_password' => ['Current password is incorrect.']
                     ]
-                ], 422);            }
+                ], 422);
+            }
 
             if ($request->filled('password')) {
                 $user->password = Hash::make($request->password);
@@ -72,12 +73,12 @@ class AdminController extends Controller
         return response()->json(['message' => 'Profile updated successfully!']);
     }
 
-    function login(): View
+    public function login(): View
     {
         return view('dashboard.login');
     }
 
-    function authenticate(Request $request): RedirectResponse
+    public function authenticate(Request $request): RedirectResponse
     {
         $credentials = $request->validate([
             'email' => ['required', 'email'],
@@ -103,12 +104,12 @@ class AdminController extends Controller
         ]);
     }
 
-    function signup(): View
+    public function signup(): View
     {
         return view('dashboard.signup');
     }
 
-    function register(Request $request): RedirectResponse
+    public function register(Request $request): RedirectResponse
     {
         $validator = Validator::make($request->all(), [
             'name' => ['required', 'string', 'max:255'],
@@ -134,7 +135,7 @@ class AdminController extends Controller
         return redirect()->route('admin.index');
     }
 
-    function logout(Request $request): RedirectResponse
+    public function logout(Request $request): RedirectResponse
     {
         Auth::logout();
         $request->session()->invalidate();
@@ -142,10 +143,9 @@ class AdminController extends Controller
         return redirect()->route('admin.login');
     }
 
-    function orders(): View
+    public function orders(): View
     {
         $orders = Order::latest()->paginate();
-        return view('dashboard.orders',compact('orders'));
+        return view('dashboard.orders', compact('orders'));
     }
-
 }

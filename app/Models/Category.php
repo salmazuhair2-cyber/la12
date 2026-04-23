@@ -10,21 +10,21 @@ class Category extends Model
     use HasFactory;
     protected $guarded = [];
 
-    function products() {
-        return $this->hasMany(product::class);
+    public function products()
+    {
+        return $this->hasMany(Product::class);
     }
 
-    function image() {
-        return $this->morphOne(Image::class , 'imageable' ) ;
-
+    public function image()
+    {
+        return $this->morphOne(Image::class, 'imageable');
     }
-    function getImgPathAttribute() {
-        $url = 'https://via.placeholder.com/100×80';
-        if($this->image) {
-            $url = asset('images/'.
-            $this->image->path);
+
+    public function getImgPathAttribute()
+    {
+        if ($this->image) {
+            return asset('images/' . $this->image->path);
         }
-        return $url;
+        return 'https://via.placeholder.com/100x80';
     }
-
 }

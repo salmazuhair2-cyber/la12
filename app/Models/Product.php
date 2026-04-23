@@ -4,53 +4,47 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-
 
 class Product extends Model
 {
     use HasFactory;
     protected $guarded = [];
-    public const  GENDERS =
-    [
-            'men'   => 'Men',
-            'women' => 'Women',
+
+    public const GENDERS = [
+        'men'   => 'Men',
+        'women' => 'Women',
     ];
-    function role() {
-        return $this->belongsTo(Category::class ,'category_id')->withDefault() ;
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class, 'category_id')->withDefault();
     }
 
-        function image() {
-            return $this->morphOne(Image::class , 'imageable' )->where('type', 'main');
-
-        }
-
-        function gallery() {
-            return $this->morphMany(Image::class , 'imageable' )->where('type', 'gallery')->latest();;
-        }
-
-        function reviews() {
-            return $this->HasMany(Review::class);
-        }
-        function order_details() {
-            return $this->HasMany(order_Detail::class);
-        }
-
-        function getImgPathAttribute() {
-            $url = 'https://via.placeholder.com/100×80';
-            if($this->image) {
-                $url = asset('images/'.
-                $this->image->path );
-            }
-            return $url;
-        }
-
+    public function image()
+    {
+        return $this->morphOne(Image::class, 'imageable')->where('type', 'main');
     }
 
+    public function gallery()
+    {
+        return $this->morphMany(Image::class, 'imageable')->where('type', 'gallery')->latest();
+    }
 
+    public function reviews()
+    {
+        return $this->hasMany(Review::class);
+    }
 
+    public function orderItems()
+    {
+        return $this->hasMany(OrderItem::class);
+    }
 
-
-
-
-
+    public function getImgPathAttribute()
+    {
+        if ($this->image) {
+            return asset('images/' . $this->image->path);
+        }
+        return 'https://via.placeholder.com/100x80';
+    }
+}

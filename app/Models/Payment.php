@@ -10,12 +10,13 @@ class Payment extends Model
     use HasFactory;
     protected $guarded = [];
 
-    function user(){
-        return $this->belongTo(User::class)->withDefault();
+    public function user()
+    {
+        return $this->belongsTo(User::class)->withDefault();
     }
 
-function order() {
-        return $this->belongTo(Order::class)->withDefault();
+    public function order()
+    {
+        return $this->belongsTo(Order::class)->withDefault();
     }
-
 }

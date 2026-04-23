@@ -40,32 +40,19 @@ class CategoryController extends Controller
      */
     public function store(CategoryRequest $request)
     {
-        // استخراج البيانات بدون صورة
         $data = $request->only('name', 'description');
-
-        // إنشاء الكاتيجوري
         $category = Category::create($data);
-        $img_name = rand().time().$request->file('image')->getClientOriginalName();
+
+        $img_name = rand() . time() . $request->file('image')->getClientOriginalName();
         $request->file('image')->move(public_path('images'), $img_name);
+
         $category->image()->create([
             'path' => $img_name,
         ]);
-        // حفظ الصورة
-        // $imageFile = $request->file('image');
-        // $imgName = uniqid() . '_' . $imageFile->getClientOriginalName();
-        // $imageFile->move(public_path('images'), $imgName);
-        
-        // ربط الصورة بالكاتيجوري (على فرض أن العلاقة موجودة image())
-        $category->image()->create([
-            'path' => $img_name
-        ]);
-        
-        // dd($request->all());
-        // إعادة التوجيه مع رسالة نجاح
+
         return redirect()
             ->route('admin.categories.index')
             ->with('success', 'Category created successfully!');
-
     }
 
 
@@ -128,6 +115,5 @@ class CategoryController extends Controller
         return redirect()
             ->route('admin.categories.index')
             ->with('success', 'Category deleted successfully!');
-
     }
 }

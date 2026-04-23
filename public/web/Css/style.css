@@ -983,7 +983,7 @@
 
   /* Start Landing */
   .landing {
-    background-image: url(../images/landing3.jpg);
+    background-image: url(../images/landing.jpg);
     background-size: cover;
     min-height: 130vh;
     position: relative;

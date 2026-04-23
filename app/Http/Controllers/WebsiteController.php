@@ -9,50 +9,38 @@ use Illuminate\View\View;
 
 class WebsiteController extends Controller
 {
-    function index(): View
+    public function index(): View
     {
-        $data = [];
-        $data['categories'] = Category::take('6')->get();
-        $data['men_products'] = Product::with('role')
+        $data['categories'] = Category::take(6)->get();
+        $data['men_products'] = Product::with('category')
             ->where('gender', 'men')
             ->take(4)
             ->get();
-
-        $data['women_products'] = Product::with('role')
+        $data['women_products'] = Product::with('category')
             ->where('gender', 'women')
             ->take(4)
             ->get();
-        $data['latest_products'] = Product::with('role')->take('4')->latest()->get();
+        $data['latest_products'] = Product::with('category')->latest()->take(4)->get();
+
         return view('website.index', $data);
     }
 
-    function about(): View
+    public function about(): View
     {
         return view('website.about');
     }
-    function login(): View
-    {
-        return view('website.login');
-    }
-    function cart(): View
-    {
-        return view('website.cart');
-    }
-   
-    function details(): View
+
+    public function details(): View
     {
         return view('website.details');
     }
-   
-    function view(): View
+
+    public function view(): View
     {
         return view('website.view');
     }
-    function wishlist(): View
-    {
-        return view('website.wishlist');
-    }
-    function contact(): View
+
+    public function contact(): View
     {
         return view('website.contact');
     }

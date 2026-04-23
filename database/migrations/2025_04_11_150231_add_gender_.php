@@ -1,23 +1,21 @@
-<!--  -->
   <?php
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration {
-    public function up(): void
-    {
-        Schema::table('products', function (Blueprint $table) {
-            $table->enum('gender', ['women', 'men'])->default('men')->after('description');
-        });
-    }
+    use Illuminate\Database\Migrations\Migration;
+    use Illuminate\Database\Schema\Blueprint;
+    use Illuminate\Support\Facades\Schema;
 
-    public function down(): void
-    {
-        Schema::table('products', function (Blueprint $table) {
-            $table->dropColumn('gender');
-        });
-    }
-};
+    return new class extends Migration {
+        public function up(): void
+        {
+            Schema::table('products', function (Blueprint $table) {
+                $table->enum('gender', ['women', 'men'])->default('men')->after('description');
+            });
+        }
 
-
+        public function down(): void
+        {
+            Schema::table('products', function (Blueprint $table) {
+                $table->dropColumn('gender');
+            });
+        }
+    };

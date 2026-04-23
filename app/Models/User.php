@@ -2,21 +2,14 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
-    /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var list<string>
-     */
     protected $fillable = [
         'name',
         'email',
@@ -25,21 +18,11 @@ class User extends Authenticatable
         'avatar'
     ];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var list<string>
-     */
     protected $hidden = [
         'password',
         'remember_token',
     ];
 
-    /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
-     */
     protected function casts(): array
     {
         return [
@@ -54,44 +37,54 @@ class User extends Authenticatable
         'employee' => 'Employee',
         'customer' => 'Customer',
     ];
+
     public function getRoleLabel(): string
-{
-    return self::ROLES[$this->type] ?? 'Unknown';
-}
+    {
+        return self::ROLES[$this->type] ?? 'Unknown';
+    }
 
     public function getIsSuperAdminAttribute(): bool
-{
-    return $this->type === 'super_admin';
-}
-    function role() {
-        return $this->belongsTo(Role::class)->withDefault() ;
-    }
-    function image() {
-        return $this->morphOne(Image::class , 'imageable' )->where('type', 'main');
-    }
-    function reviews() {
-        return $this->HasMany(Review::class);
-    }
-    function order() {
-        return $this->HasMany(Order::class);
-    }
-    function order_details() {
-        return $this->HasMany(order_Detail::class);
-    }
-    function payment() {
-        return $this->HasMany(paymentl::class);
+    {
+        return $this->type === 'super_admin';
     }
 
-    function testimonials() {
-        return $this->HasMany(Testimonials::class);
+    public function role()
+    {
+        return $this->belongsTo(Role::class)->withDefault();
     }
+
+    public function image()
+    {
+        return $this->morphOne(Image::class, 'imageable')->where('type', 'main');
+    }
+
+    public function reviews()
+    {
+        return $this->hasMany(Review::class);
+    }
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
+
+    public function payment()
+    {
+        return $this->hasMany(Payment::class);
+    }
+
+    public function testimonials()
+    {
+        return $this->hasMany(Testimonial::class);
+    }
+
     public function cart()
-{
-    return $this->hasMany(Cart::class);
-}
-public function wishlist(){
-    return $this->hasMany(Wishlist::class);
-}
- }
+    {
+        return $this->hasMany(Cart::class);
+    }
 
-
+    public function wishlist()
+    {
+        return $this->hasMany(Wishlist::class);
+    }
+}

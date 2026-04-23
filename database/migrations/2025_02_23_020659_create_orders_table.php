@@ -22,12 +22,11 @@ return new class extends Migration
             $table->string('phone');
             $table->string('email');
             $table->text('note')->nullable();
-            $table->enum('payment_method', ['bank', 'check','paypal']);
-            $table->enum('status')->default('pending');
+            $table->enum('payment_method', ['bank', 'check', 'paypal']);
+            $table->enum('status', ['pending', 'confirmed', 'canceled'])->default('pending');
             $table->decimal('total', 10, 2);
             $table->timestamps();
         });
-        
     }
 
     /**

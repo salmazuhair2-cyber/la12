@@ -55,15 +55,15 @@
         </div>
         <div class="container grid">
             @forelse($categories as $category)
-                <div class="image">
-                    <a href="{{ route('website.products.index',['category'=> $category->id] ) }}">
-                        <img src="{{ asset('images/' . $category->image()->first()?->path) }}"
-                            alt="{{ $category->name }}" />
-                        <button class="button">{{ $category->name }}</button>
-                    </a>
-                </div>
+            <div class="image">
+                <a href="{{ route('website.products.index',['category'=> $category->id] ) }}">
+                    <img src="{{ asset('images/' . $category->image()->first()?->path) }}"
+                        alt="{{ $category->name }}" />
+                    <button class="button">{{ $category->name }}</button>
+                </a>
+            </div>
             @empty
-                <p>{{ __('No Categries Found') }}</p>
+            <p>{{ __('No Categries Found') }}</p>
             @endforelse
 
 
@@ -72,9 +72,9 @@
     <!-- end view product -->
     <!-- Start Categories -->
 
-    <div class="latest"  data-aos="fade-up" data-aos-duration="2000" style="padding-bottom:0">
+    <div class="latest" data-aos="fade-up" data-aos-duration="2000" style="padding-bottom:0">
         <div class="spacial-content">
-            <h1 id="font" >Explore our collections</h1>
+            <h1 id="font">Explore our collections</h1>
 
         </div>
         <h2 class="category-title" style="margin-top: 0px">For Women's</h2>
@@ -86,7 +86,7 @@
                     <img src="{{ $product->img_path }}" width="274px" height="274px" alt="{{ $product->name }}" />
                 </a>
                 <div class="content">
-                    <a href="{{ route('website.products.show',$product->id) }}">{{ $product->role->name }}</a>
+                    <a href="{{ route('website.products.show',$product->id) }}">{{ $product->category->name }}</a>
                     <h2>{{ $product->name }}</h2>
                     <span>${{number_format($product->price,2) }}</span>
                 </div>
@@ -104,7 +104,7 @@
             @endforeach
         </div>
     </div>
-    <div class="latest"  data-aos="fade-up" data-aos-duration="2000">
+    <div class="latest" data-aos="fade-up" data-aos-duration="2000">
 
         <h2 class="category-title">For Men's</h2>
         <div class="container grid" style="margin-top: 10px" id="product-container">
@@ -114,7 +114,7 @@
                     <img src="{{ $product->img_path }}" width="274px" height="274px" alt="{{ $product->name }}" />
                 </a>
                 <div class="content">
-                    <a href="{{ route('website.products.show',$product->id) }}">{{ $product->role->name }}</a>
+                    <a href="{{ route('website.products.show',$product->id) }}">{{ $product->category->name }}</a>
                     <h2>{{ $product->name }}</h2>
                     <span>${{ number_format($product->price,2) }}</span>
                 </div>
@@ -175,25 +175,25 @@
         </div>
         <div class="container">
             @forelse($latest_products as $latest_product)
-                <div class="image">
-                    <a href="{{ route('website.products.show',$latest_product->id) }}"><img src="{{ $latest_product->img_path }}" alt="clothing30"
-                            style="width:100%;height: 250px;" /></a>
-                    <div class="content">
-                        <a href="{{ route('website.products.show',$latest_product->id) }}">{{ $latest_product->role->name }}</a>
-                        <h2>{{ $latest_product->name }}</h2>
-                        <span>{{ number_format($latest_product->price, 2) }}$</span>
-                    </div>
-                    <div class="event" data-product-id="{{ $latest_product->id }}">
-                        <a onclick="addProductToCart(event)">
-                            <i class="fas fa-cart-plus" data-text="Add To Cart" aria-hidden="true"></i>
-                        </a>
-                        <a onclick="addProductToWishlist(event)" data-product-id="{{ $latest_product->id }}">
-                            <i class="fas fa-heart" data-text="WatchList"></i>
-                        </a>
-                    </div>
+            <div class="image">
+                <a href="{{ route('website.products.show',$latest_product->id) }}"><img src="{{ $latest_product->img_path }}" alt="clothing30"
+                        style="width:100%;height: 250px;" /></a>
+                <div class="content">
+                    <a href="{{ route('website.products.show',$latest_product->id) }}">{{ $latest_product->category->name }}</a>
+                    <h2>{{ $latest_product->name }}</h2>
+                    <span>{{ number_format($latest_product->price, 2) }}$</span>
                 </div>
+                <div class="event" data-product-id="{{ $latest_product->id }}">
+                    <a onclick="addProductToCart(event)">
+                        <i class="fas fa-cart-plus" data-text="Add To Cart" aria-hidden="true"></i>
+                    </a>
+                    <a onclick="addProductToWishlist(event)" data-product-id="{{ $latest_product->id }}">
+                        <i class="fas fa-heart" data-text="WatchList"></i>
+                    </a>
+                </div>
+            </div>
             @empty
-                <p>{{ __('No Products Found') }}</p>
+            <p>{{ __('No Products Found') }}</p>
             @endforelse
 
         </div>
@@ -212,78 +212,78 @@
             <div class="image">
                 <a href="details.html?id=Clot-W-091">
                     <img src="{{ asset('web/images/clothing2.png') }}" alt="clothing2" /></a>
-                <div class="content">
-                    <a href="products.html?category=Clothing">Clothing</a>
-                    <h2>Comfortable and beautiful blouse</h2>
-                    <span>$60.00</span>
-                </div>
-                <div class="event" data-product-id="Clot-W-091">
-                    <a onclick="addProductToCart(event)">
-                        <i class="fas fa-cart-plus" data-text="Add To Cart"></i>
-                    </a>
+    <div class="content">
+        <a href="products.html?category=Clothing">Clothing</a>
+        <h2>Comfortable and beautiful blouse</h2>
+        <span>$60.00</span>
+    </div>
+    <div class="event" data-product-id="Clot-W-091">
+        <a onclick="addProductToCart(event)">
+            <i class="fas fa-cart-plus" data-text="Add To Cart"></i>
+        </a>
 
-                    <a onclick="addProductToWishlist(event)" data-product-id="Clot-W-091">
-                        <i class="fas fa-heart" data-text="WatchList"></i>
-                    </a>
-                </div>
-            </div>
-            <div class="image">
-                <a href="details.html?id=Clot-M-070">
-                    <img src="{{ asset('web/images/clothing9.jpg') }}" alt="clothing9" /></a>
-                <div class="content">
-                    <a href="products.html?category=Clothing">Clothing</a>
-                    <h2>Full formal suit excellent material</h2>
-                    <span>150$</span>
-                </div>
-                <div class="event" data-product-id="Clot-M-070">
-                    <a onclick="addProductToCart(event)">
-                        <i class="fas fa-cart-plus" data-text="Add To Cart"></i>
-                    </a>
-
-                    <a onclick="addProductToWishlist(event)" data-product-id="Clot-M-070">
-                        <i class="fas fa-heart" data-text="WatchList"></i>
-                    </a>
-                </div>
-                <div class="discount">-30%</div>
-            </div>
-            <div class="image">
-                <a href="details.html?id=Clot-M-054">
-                    <img src="{{ asset('web/images/clothing38.png') }}" alt="clothing38" /></a>
-                <div class="content">
-                    <a href="products.html?category=Clothing">Clothing</a>
-                    <h2>Grey sports tracksuit, excellent quality</h2>
-                    <span>$150.00</span>
-                </div>
-                <div class="event" data-product-id="Clot-M-054">
-                    <a onclick="addProductToCart(event)">
-                        <i class="fas fa-cart-plus" data-text="Add To Cart"></i>
-                    </a>
-
-                    <a onclick="addProductToWishlist(event)"data-product-id="Clot-M-054">
-                        <i class="fas fa-heart" data-text="WatchList"></i>
-                    </a>
-                </div>
-            </div>
-            <div class="image">
-                <a href="details.html?id=Clot-W-066">
-                    <img src="{{ asset('web/images/clothing13.jpg') }}" alt="clothing13" />
-                </a>
-                <div class="content">
-                    <a href="products.html?category=Clothing">Clothing</a>
-                    <h2>Modern design skirt</h2>
-                    <span>$60.00</span>
-                </div>
-                <div class="event" data-product-id="Clot-W-066">
-                    <a onclick="addProductToCart(event)">
-                        <i class="fas fa-cart-plus" data-text="Add To Cart"></i>
-                    </a>
-
-                    <a onclick="addProductToWishlist(event)" data-product-id="Clot-W-066">
-                        <i class="fas fa-heart" data-text="WatchList"></i>
-                    </a>
-                </div>
-            </div>
+        <a onclick="addProductToWishlist(event)" data-product-id="Clot-W-091">
+            <i class="fas fa-heart" data-text="WatchList"></i>
+        </a>
+    </div>
+    </div>
+    <div class="image">
+        <a href="details.html?id=Clot-M-070">
+            <img src="{{ asset('web/images/clothing9.jpg') }}" alt="clothing9" /></a>
+        <div class="content">
+            <a href="products.html?category=Clothing">Clothing</a>
+            <h2>Full formal suit excellent material</h2>
+            <span>150$</span>
         </div>
+        <div class="event" data-product-id="Clot-M-070">
+            <a onclick="addProductToCart(event)">
+                <i class="fas fa-cart-plus" data-text="Add To Cart"></i>
+            </a>
+
+            <a onclick="addProductToWishlist(event)" data-product-id="Clot-M-070">
+                <i class="fas fa-heart" data-text="WatchList"></i>
+            </a>
+        </div>
+        <div class="discount">-30%</div>
+    </div>
+    <div class="image">
+        <a href="details.html?id=Clot-M-054">
+            <img src="{{ asset('web/images/clothing38.png') }}" alt="clothing38" /></a>
+        <div class="content">
+            <a href="products.html?category=Clothing">Clothing</a>
+            <h2>Grey sports tracksuit, excellent quality</h2>
+            <span>$150.00</span>
+        </div>
+        <div class="event" data-product-id="Clot-M-054">
+            <a onclick="addProductToCart(event)">
+                <i class="fas fa-cart-plus" data-text="Add To Cart"></i>
+            </a>
+
+            <a onclick="addProductToWishlist(event)" data-product-id="Clot-M-054">
+                <i class="fas fa-heart" data-text="WatchList"></i>
+            </a>
+        </div>
+    </div>
+    <div class="image">
+        <a href="details.html?id=Clot-W-066">
+            <img src="{{ asset('web/images/clothing13.jpg') }}" alt="clothing13" />
+        </a>
+        <div class="content">
+            <a href="products.html?category=Clothing">Clothing</a>
+            <h2>Modern design skirt</h2>
+            <span>$60.00</span>
+        </div>
+        <div class="event" data-product-id="Clot-W-066">
+            <a onclick="addProductToCart(event)">
+                <i class="fas fa-cart-plus" data-text="Add To Cart"></i>
+            </a>
+
+            <a onclick="addProductToWishlist(event)" data-product-id="Clot-W-066">
+                <i class="fas fa-heart" data-text="WatchList"></i>
+            </a>
+        </div>
+    </div>
+    </div>
     </div> --}}
     <!-- End New arrivals -->
     <!-- Start available -->

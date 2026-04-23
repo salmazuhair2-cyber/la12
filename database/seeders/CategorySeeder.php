@@ -10,9 +10,10 @@ class CategorySeeder extends Seeder
 {
     public function run(): void
     {
-        DB::statement('SET FOREIGN_KEY_CHECKS=0;');   
+        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
         Category::truncate();
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+
         $categories = [
             [
                 'name' => 'Clothing',
@@ -31,8 +32,16 @@ class CategorySeeder extends Seeder
             ],
         ];
 
-        foreach ($categories as $category) {
-            Category::create($category);
+        foreach ($categories as $data) {
+            $category = Category::create([
+                'name' => $data['name'],
+                'description' => $data['description'],
+            ]);
+
+            $category->image()->create([
+                'path' => $data['image'],
+                'type' => 'main',
+            ]);
         }
     }
 }

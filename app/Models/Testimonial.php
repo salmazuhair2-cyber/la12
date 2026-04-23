@@ -9,8 +9,9 @@ class Testimonial extends Model
 {
     use HasFactory;
     protected $guarded = [];
-    
-    function role() {
-        return $this->belongsTo(Role::class)->withDefault() ;
+
+    public function user()
+    {
+        return $this->belongsTo(User::class)->withDefault();
     }
 }

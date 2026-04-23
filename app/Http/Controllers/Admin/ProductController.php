@@ -17,8 +17,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-       $products= Product::paginate();
-       return view('dashboard.products.index',compact('products'));
+        $products = Product::paginate();
+        return view('dashboard.products.index', compact('products'));
     }
 
 
@@ -27,11 +27,10 @@ class ProductController extends Controller
      */
     public function create()
     {
-        $categories = Category::select('id','name')->get();
-        $product = new product();
+        $categories = Category::select('id', 'name')->get();
+        $product = new Product();
         $genders = Product::GENDERS;
-        return view('dashboard.products.create', compact('categories','product','genders'));
-
+        return view('dashboard.products.create', compact('categories', 'product', 'genders'));
     }
 
     /**
@@ -48,7 +47,7 @@ class ProductController extends Controller
             'quantity' => 'required|numeric',
             'category_id' => 'required|exists:categories,id',
         ]);
-    
+
         $product = Product::create([
             'name' => $request->name,
             'description' => $request->description,
@@ -57,22 +56,21 @@ class ProductController extends Controller
             'category_id' => $request->category_id,
             'gender' => $request->gender,
         ]);
-    
+
         // Add image to relation
         if ($request->hasFile('image')) {
             $img_name = rand() . time() . '.' . $request->file('image')->getClientOriginalExtension();
             $request->file('image')->move(public_path('images'), $img_name);
-            
+
             $product->image()->create([
                 'path' => $img_name,
                 'type' => 'main',
             ]);
         }
-    
+
         return redirect()
             ->route('admin.products.index')
             ->with('success', 'Product added successfully!');
-           
     }
 
 
@@ -81,7 +79,7 @@ class ProductController extends Controller
     /**
      * Display the specified resource.
      */
-      public function show(string $id)
+    public function show(string $id)
     {
         //
     }
@@ -91,11 +89,10 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        $categories = Category::select('id','name')->get();
+        $categories = Category::select('id', 'name')->get();
         $genders = Product::GENDERS;
 
-        return view('dashboard.products.edit' , compact('product', 'categories','genders'));
-
+        return view('dashboard.products.edit', compact('product', 'categories', 'genders'));
     }
 
     /**
@@ -111,7 +108,7 @@ class ProductController extends Controller
             'category_id' => 'required|exists:categories,id',
             'image' => 'nullable|image|max:2048',
         ]);
-    
+
         $product->update([
             'name' => $request->name,
             'description' => $request->description,
@@ -120,7 +117,7 @@ class ProductController extends Controller
             'category_id' => $request->category_id,
             'gender' => $request->gender,
         ]);
-    
+
         // Replace main image if uploaded
         if ($request->hasFile('image')) {
             // Delete old image
@@ -131,16 +128,16 @@ class ProductController extends Controller
                 }
                 $product->image()->delete();
             }
-    
+
             $imgName = rand() . time() . '.' . $request->file('image')->getClientOriginalExtension();
             $request->file('image')->move(public_path('images'), $imgName);
-            
+
             $product->image()->create([
                 'path' => $imgName,
                 'type' => 'main',
             ]);
         }
-    
+
         return redirect()->route('admin.products.index')
             ->with('success', 'Product updated successfully!');
     }
@@ -155,7 +152,7 @@ class ProductController extends Controller
             File::delete(public_path('images/' . $product->image->path));
         }
 
-     
+
         $product->image()->delete();
         $product->delete();
 
@@ -164,39 +161,39 @@ class ProductController extends Controller
             ->with('success', 'Product deleted successfully!');
     }
     public function gallery(Product $product)
-{
-    $product->load('gallery');
-    return view('dashboard.products.gallery', compact('product'));
-}
-
-// Upload new images
-public function uploadGallery(Request $request, Product $product)
-{
-    $request->validate([
-        'gallery.*' => 'image|max:2048'
-    ]);
-
-    if ($request->hasFile('gallery')) {
-        foreach ($request->file('gallery') as $img) {
-            $img_name = rand() . time() . $img->getClientOriginalName();
-            $img->move(public_path('images'), $img_name);
-
-            $product->gallery()->create([
-                'path' => $img_name,
-                'type' => 'gallery',
-            ]);
-        }
+    {
+        $product->load('gallery');
+        return view('dashboard.products.gallery', compact('product'));
     }
 
-    return back()->with('success', 'Images uploaded successfully!');
-}
+    // Upload new images
+    public function uploadGallery(Request $request, Product $product)
+    {
+        $request->validate([
+            'gallery.*' => 'image|max:2048'
+        ]);
 
-// Delete image
-public function deleteGalleryImage(Image $image)
-{
-    File::delete(public_path('images/' . $image->path));
-    $image->delete();
+        if ($request->hasFile('gallery')) {
+            foreach ($request->file('gallery') as $img) {
+                $img_name = rand() . time() . $img->getClientOriginalName();
+                $img->move(public_path('images'), $img_name);
 
-    return back()->with('success', 'Image deleted successfully!')->with('type', 'danger');
-}
+                $product->gallery()->create([
+                    'path' => $img_name,
+                    'type' => 'gallery',
+                ]);
+            }
+        }
+
+        return back()->with('success', 'Images uploaded successfully!');
+    }
+
+    // Delete image
+    public function deleteGalleryImage(Image $image)
+    {
+        File::delete(public_path('images/' . $image->path));
+        $image->delete();
+
+        return back()->with('success', 'Image deleted successfully!')->with('type', 'danger');
+    }
 }
