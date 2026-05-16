@@ -1,9 +1,9 @@
 :root {
-    --main-color: #87ceeb;
+    --main-color: #fdfdfd;
     --second-color: #ffffff;
     --transparent-color: #2a2a2a8a;
-    --header-color: #000000;
-    --little-par: #ff69b4;
+    --header-color: #202020;
+    --little-par: #ff3496;
     --section-padding: 70px;
     --little-use-color: red;
     --transition-duration: 0.5s;
@@ -200,17 +200,9 @@
     background-image: radial-gradient(
       circle,
       #87ceeb,
-      #80c4f8,
-      #90b6ff,
-      #b2a3fb,
-      #d88ce7,
-      #d376c4,
-      #c961a1,
-      #bb4f80,
-      #8a3d5d,
-      #5b2b3d,
-      #301a21,
-      #000000
+      #d1eafd,
+      #d7e4fd,
+      #b2a3fb
     );
     background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -225,18 +217,11 @@
     border-radius: 50%;
     background-image: linear-gradient(
       to right bottom,
-      #87ceeb,
-      #80c4f8,
-      #90b6ff,
-      #b2a3fb,
-      #d88ce7,
-      #d376c4,
-      #c961a1,
-      #bb4f80,
-      #8a3d5d,
-      #5b2b3d,
-      #301a21,
-      #000000
+        #87ceeb,
+      #d1eafd,
+      #d7e4fd,
+      #b2a3fb
+     
     );
     animation: anim 4s linear infinite;
   }
@@ -1035,9 +1020,9 @@
     background: rgb(255, 255, 255);
     background: radial-gradient(
       circle,
-      rgba(255, 255, 255, 1) 7%,
-      rgba(135, 206, 235, 1) 29%,
-      rgba(255, 105, 180, 1) 40%
+      rgb(252, 197, 57) 7%,
+      rgb(255, 228, 155) 29%,
+      rgb(250, 187, 40) 40%
     );
     color: transparent;
     background-clip: text;
@@ -2449,10 +2434,9 @@
     background: linear-gradient(
       to right top,
       #87ceeb,
-      #83c0fc,
-      #a6aafe,
-      #d88ce7,
-      #ff69b4
+      #2d96ff,
+      #ff4fdf,
+    
     );
     border-bottom: 3px solid var(--main-color);
     transform: rotate(10deg) skewY(40deg);
@@ -2661,9 +2645,8 @@
   .center-text {
     background: linear-gradient(
       to left,
-      #ff69b4,
+      #f8409c,
       #d88ce7,
-      #a6aafe,
       #83c0fc,
       #87ceeb
     );

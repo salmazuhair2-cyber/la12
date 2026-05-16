@@ -30,23 +30,22 @@ return $item->product->price;
     <script src="https://kit.fontawesome.com/c1a12a9bed.js" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
-
-    <script>
-        const APP_ROUTES = {
-            cartAdd: "{{ route('website.cart.add') }}",
-            login: "{{ route('customer.login') }}",
-            cartRemove: "{{ route('website.cart.remove') }}",
-            cartUpdate: "{{ route('website.cart.update') }}",
-            wishlistAdd: "{{ route('website.wishlist.add') }}",
-            wishlistRemove: "{{ route('website.wishlist.remove') }}",
-        };
-    </script>
-
     @stack('styles')
-
 </head>
 
 <body>
+    <script>
+        var IS_LOGGED_IN = <?php echo auth()->check() ? 'true' : 'false'; ?>;
+        var APP_ROUTES = {
+            cartAdd: "<?php echo route('website.cart.add'); ?>",
+            login: "<?php echo route('customer.login'); ?>",
+            cartRemove: "<?php echo route('website.cart.remove'); ?>",
+            cartUpdate: "<?php echo route('website.cart.update'); ?>",
+            wishlistAdd: "<?php echo route('website.wishlist.add'); ?>",
+            wishlistRemove: "<?php echo route('website.wishlist.remove'); ?>",
+        };
+    </script>
+
     <!-- Start Header -->
     <header>
         <div class="container">

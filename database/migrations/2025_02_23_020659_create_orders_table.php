@@ -22,7 +22,8 @@ return new class extends Migration
             $table->string('phone');
             $table->string('email');
             $table->text('note')->nullable();
-            $table->enum('payment_method', ['bank', 'check', 'paypal']);
+            $table->enum('payment_method', ['cash', 'mahwazti', 'bank_of_palestine', 'arab_islamic_bank']);
+            $table->string('transaction_number')->nullable();
             $table->enum('status', ['pending', 'confirmed', 'canceled'])->default('pending');
             $table->decimal('total', 10, 2);
             $table->timestamps();

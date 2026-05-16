@@ -12,7 +12,9 @@ class ProductController extends Controller
 {
     public function index(Request $request): View
     {
-
+        if ($request->has('search') && $request->search !== '') {
+            $query->where('name', 'like', '%' . $request->search . '%');
+        }
         $query = Product::query();
         $data = [];
 

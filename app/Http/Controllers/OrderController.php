@@ -50,7 +50,7 @@ class OrderController extends Controller
             'postcode' => 'required',
             'phone' => 'required',
             'email' => 'required|email',
-            'payment_method' => 'required|in:bank,check,paypal',
+            'payment_method' => 'required|in:cash,mahwazti,bank_of_palestine,arab_islamic_bank',
         ]);
 
         $user = auth()->user();
@@ -67,20 +67,20 @@ class OrderController extends Controller
 
             // Create the order
             $order = Order::create([
-                'user_id' => $user->id,
-                'name' => $request->name,
-                'address' => $request->address,
-                'city' => $request->city,
-                'country' => $request->country,
-                'postcode' => $request->postcode,
-                'phone' => $request->phone,
-                'email' => $request->email,
-                'note' => $request->note,
-                'delivery_type' => $request->delivery_type,
-                'status' => 'pending',
-                'total' => $total,
-            ]);
-
+    'user_id' => $user->id,
+    'name' => $request->name,
+    'address' => $request->address,
+    'city' => $request->city,
+    'country' => $request->country,
+    'postcode' => $request->postcode,
+    'phone' => $request->phone,
+    'email' => $request->email,
+    'note' => $request->note,
+    'payment_method' => $request->payment_method,
+    'transaction_number' => $request->transaction_number,
+    'status' => 'pending',
+    'total' => $total,
+]);
             // Create order items
             foreach ($cart as $item) {
                 $order->items()->create([
@@ -104,15 +104,21 @@ class OrderController extends Controller
     }
 
     public function handleAction(Order $order, string $action)
-{
-    if (!in_array($action, ['confirm', 'cancel'])) {
-        abort(400, 'Invalid action');
+    {
+        if (!in_array($action, ['confirm', 'cancel'])) {
+            abort(400, 'Invalid action');
+        }
+
+        $status = $action === 'confirm' ? 'confirmed' : 'canceled';
+        $order->update(['status' => $status]);
+
+        return redirect()->back()->with('success', "Order has been {$status}.");
     }
-
-    $status = $action === 'confirm' ? 'confirmed' : 'canceled';
-    $order->update(['status' => $status]);
-
-    return redirect()->back()->with('success', "Order has been {$status}.");
 }
 
+
+public function myOrders()
+{
+    $orders = auth()->user()->orders()->latest()->paginate(10);
+    return view('website.orders', compact('orders'));
 }
