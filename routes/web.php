@@ -20,9 +20,11 @@ Route::post('/wishlist/remove', [WishlistController::class, 'removeFromWishlist'
 Route::get('/wishlist', [WishlistController::class, 'index'])->name('website.wishlist.index');
 Route::get('/checkout', [OrderController::class, 'index'])->name('website.checkout');
 Route::post('/orders/store', [OrderController::class, 'store'])->name('website.orders.store');
-Route::get('/products/index', [ProductController::class, 'index'])->name('website.products.index');
+
+Route::get('/products', [ProductController::class, 'index'])->name('website.products.index');
 Route::post('/products/store-review/{id}', [ProductController::class, 'storeRevieew'])->name('website.products.storeReviews');
 Route::get('/products/{id?}', [ProductController::class, 'show'])->name('website.products.show');
+
 Route::get('/details', [WebsiteController::class, 'details'])->name('website.details');
 Route::get('/view', [WebsiteController::class, 'view'])->name('website.view');
 Route::get('/contact', [WebsiteController::class, 'contact'])->name('website.contact');

@@ -1,16 +1,16 @@
 @php
-    $items = auth()->check()
-        ? \App\Models\Cart::with('product')
-            ->where('user_id', auth()->id())
-            ->get()
-        : collect();
-    $subtotal = $items->sum(function ($item) {
-        return $item->price * $item->quantity;
-    });
-    $wishlistItems = auth()->check() ? auth()->user()->wishlist()->with('product')->get() : collect();
-    $subtotalWishlist = $wishlistItems->sum(function ($item) {
-        return $item->product->price;
-    });
+$items = auth()->check()
+? \App\Models\Cart::with('product')
+->where('user_id', auth()->id())
+->get()
+: collect();
+$subtotal = $items->sum(function ($item) {
+return $item->price * $item->quantity;
+});
+$wishlistItems = auth()->check() ? auth()->user()->wishlist()->with('product')->get() : collect();
+$subtotalWishlist = $wishlistItems->sum(function ($item) {
+return $item->product->price;
+});
 @endphp
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
@@ -54,10 +54,10 @@
                 <div class="quick-navigation">
                     <p><i class="icon" id="close-btn">&times;</i> Quick Navigation</p>
                 </div>
-                <div class="search-container2">
-                    <input type="text" class="searchBox" placeholder="Search..." />
-                    <i class="bi bi-search" id="searchBtn1"></i>
-                </div>
+                <form action="{{ route('website.products.index') }}" method="GET">
+                    <input type="text" name="search" placeholder="Search products...">
+                    <button type="submit" id="closeBtn" class="closeBtn">Search</button>
+                </form>
                 <div class="tab-buttons">
                     <button id="mobile-menu-btn" class="tab active">Mobile Menu</button>
                     <button id="categories-btn" class="tab">Categories</button>
@@ -321,7 +321,7 @@
                     </li>
                 </ul>
                 <div class="social-links">
-                    <a href="https://x.com/Shatha72401840?t=0D6VaDRh-zZ1hF4LdM5J3w&s=35"target="_blank"><i
+                    <a href="https://x.com/Shatha72401840?t=0D6VaDRh-zZ1hF4LdM5J3w&s=35" target="_blank"><i
                             class="fab fa-twitter"></i></a>
                     <a href="https://www.facebook.com/share/161bfAfvt4/" target="_blank"><i
                             class="fab fa-facebook"></i></a>
@@ -395,21 +395,21 @@
             </ul>
             <div class="icons">
                 @auth
-                    <div class="user-dropdown">
-                        <a href="#" class="profile-link">
-                            <i class="bi bi-person" id="profile-icon"></i>
-                            <span class="username">{{ Auth::user()->name }}</span>
-                        </a>
-                        <div class="dropdown-content">
-                            <a href="{{ route('website.wishlist.index') }}"><i class="bi bi-heart"></i> My Wishlist</a>
-                            <form action="{{ route('customer.logout') }}" method="POST" class="logout-form">
-                                @csrf
-                                <button type="submit"><i class="bi bi-box-arrow-right"></i> Logout</button>
-                            </form>
-                        </div>
+                <div class="user-dropdown">
+                    <a href="#" class="profile-link">
+                        <i class="bi bi-person" id="profile-icon"></i>
+                        <span class="username">{{ Auth::user()->name }}</span>
+                    </a>
+                    <div class="dropdown-content">
+                        <a href="{{ route('website.wishlist.index') }}"><i class="bi bi-heart"></i> My Wishlist</a>
+                        <form action="{{ route('customer.logout') }}" method="POST" class="logout-form">
+                            @csrf
+                            <button type="submit"><i class="bi bi-box-arrow-right"></i> Logout</button>
+                        </form>
                     </div>
+                </div>
                 @else
-                    <a href="{{ route('customer.login') }}"><i class="bi bi-person" id="profile-icon"></i></a>
+                <a href="{{ route('customer.login') }}"><i class="bi bi-person" id="profile-icon"></i></a>
                 @endauth
 
 
@@ -482,36 +482,36 @@
 
     <div class="details-products" data-aos="fade-up" data-aos-duration="2000">
         <div class="container grid" id="product-container">
-           dddddddddddddddddddddddddd
+            dddddddddddddddddddddddddd
         </div>
 
         <!-- Pagination -->
         <div class="pagination-container">
             <button id="prev-btn"
                 @if ($products->onFirstPage()) disabled
-              @else onclick="window.location='{{ $products->previousPageUrl() }}'" @endif>
+                @else onclick="window.location='{{ $products->previousPageUrl() }}'" @endif>
                 Prev
             </button>
 
             <div id="pagination-numbers">
                 @for ($i = 1; $i <= $products->lastPage(); $i++)
-                    <button @if ($i == $products->currentPage()) class="active" @endif
+                    <button @if ($i==$products->currentPage()) class="active" @endif
                         onclick="window.location='{{ $products->url($i) }}'">
                         {{ $i }}
                     </button>
-                @endfor
+                    @endfor
             </div>
 
             <button id="next-btn"
                 @if ($products->hasMorePages()) onclick="window.location='{{ $products->nextPageUrl() }}'"
-              @else
-                  disabled @endif>
+                @else
+                disabled @endif>
                 Next
             </button>
         </div>
     </div>
 
-    
+
     <!-- End Categories -->
     <div class="popup-overlay1" id="popup1">
         <div class="popup1">
@@ -538,7 +538,11 @@
         </div>
     </div>
     <script>
-        const IS_LOGGED_IN = {{ auth()->check() ? 'true' : 'false' }};
+        const IS_LOGGED_IN = {
+            {
+                auth() - > check() ? 'true' : 'false'
+            }
+        };
         const APP_ROUTES = {
             cartAdd: "{{ route('website.cart.add') }}",
             login: "{{ route('customer.login') }}",

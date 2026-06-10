@@ -11,7 +11,9 @@ return new class extends Migration
         Schema::table('orders', function (Blueprint $table) {
             $table->string('payment_method')->default('cash')->change();
             $table->string('payment_status')->default('pending')->after('payment_method');
-            $table->string('transaction_number')->nullable()->after('payment_status');
+            if (!Schema::hasColumn('orders', 'transaction_number')) {
+                $table->string('transaction_number')->nullable();
+            }
             $table->string('payment_account')->nullable()->after('transaction_number');
         });
     }

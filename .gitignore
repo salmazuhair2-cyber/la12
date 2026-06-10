@@ -33,3 +33,8 @@ vendor
 .env
 dist
 build
+/vendor
+/node_modules
+/.env
+/public/storage
+/storage/*.key

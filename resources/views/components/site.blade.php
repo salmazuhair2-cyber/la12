@@ -145,7 +145,7 @@ return $item->product->price;
                 @include('website.wishlist.wishlist-mnue')
                 @include('website.carts.cart-mnue')
 
-                <i class="bi bi-search" id="searchBtn"></i>
+
                 <div class="search-container">
                     <div class="boxSearch" id="searchBox">
                         <input type="text" placeholder="Type your search..." />

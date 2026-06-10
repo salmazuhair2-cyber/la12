@@ -28,24 +28,26 @@ let icon3 = document.getElementById("icon");
 
 // إظهار مربع البحث وإخفاء قائمة الـ nav وأيقونة البحث
 searchBtn.addEventListener("click", () => {
-  shop.style.display = "none";
-  person.style.display = "none";
-  icon3.style.display = "none";
-  nav.style.display = "none";
-  searchBtn.style.display = "none"; // إخفاء أيقونة البحث
-  searchBox.style.display = "flex"; // إظهار مربع البحث
-});
 
+  if (shop) shop.style.display = "none";
+  if (person) person.style.display = "none";
+  if (icon3) icon3.style.display = "none";
+  if (nav) nav.style.display = "none";
+
+  searchBtn.style.display = "none";
+  searchBox.style.display = "flex";
+});
 // إخفاء مربع البحث وإعادة عرض قائمة الـ nav وأيقونة البحث
 closeBtn.addEventListener("click", () => {
-  person.style.display = "flex"; // إخفاء الـ nav
-  shop.style.display = "flex"; // إخفاء الـ nav
-  icon3.style.display = "flex"; // إخفاء الـ nav
-  searchBox.style.display = "none"; // إخفاء مربع البحث
-  nav.style.display = "flex"; // إعادة عرض الـ nav
-  searchBtn.style.display = "block"; // إعادة عرض أيقونة البحث
-});
 
+  if (person) person.style.display = "flex";
+  if (shop) shop.style.display = "flex";
+  if (icon3) icon3.style.display = "flex";
+  if (nav) nav.style.display = "flex";
+
+  searchBox.style.display = "none";
+  searchBtn.style.display = "block";
+});
 //sidebar
 document.addEventListener("DOMContentLoaded", () => {
   let sidebar = document.getElementById("sidebar");

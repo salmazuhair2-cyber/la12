@@ -119,47 +119,7 @@ menuToggle.addEventListener('click', () => {
   icon.classList.toggle('fa-bars-staggered');
   icon.classList.toggle('fa-xmark');
 });
-//search
 
-// البحث عن العناصر
-let searchBtn = document.getElementById('searchBtn'); 
-let searchBox = document.getElementById('searchBox'); 
-let closeBtn = document.getElementById('closeBtn'); 
-let nav = document.querySelector('header .nav'); 
-let person = document.querySelector('.bi-person');  
-let shop = document.querySelector('.bi-cart3');  
-let icon3 = document.getElementById('icon');  
-let wishlistIcon = document.getElementById('wishlist-icon');  
-
-// دالة لضبط العرض مع التحقق من وجود العنصر
-function setDisplay(element, value) {
-  if (element) {
-    element.style.display = value;
-  }
-}
-
-// عند الضغط على زر البحث
-searchBtn.addEventListener('click', () => {
-  setDisplay(shop, 'none');  
-  setDisplay(person, 'none');  
-  setDisplay(icon3, 'none');  
-  setDisplay(nav, 'none');  
-  setDisplay(searchBtn, 'none');  
-  setDisplay(searchBox, 'flex');  
-  setDisplay(wishlistIcon, 'none');  
-});
-
-// عند الضغط على زر الإغلاق
-closeBtn.addEventListener('click', () => {
-  setDisplay(person, 'flex'); 
-  setDisplay(shop, 'flex'); 
-  setDisplay(icon3, 'flex'); 
-  setDisplay(searchBox, 'none'); 
-  setDisplay(nav, 'flex'); 
-  setDisplay(searchBtn, 'flex'); 
-  setDisplay(wishlistIcon, 'flex');  
-
-});
 
 //sidebar
 document.addEventListener("DOMContentLoaded", () => {
@@ -174,7 +134,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let mobileMenu = document.getElementById("mobile-menu");
   let categoriesMenu = document.getElementById("categories");
 
-   
+});
   openBtn.addEventListener("click", () => {
     sidebar.classList.add("open");
     overlay.style.display = "block";

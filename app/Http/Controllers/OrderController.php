@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+
 use App\Models\Cart;
 use App\Models\Order;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -67,20 +69,20 @@ class OrderController extends Controller
 
             // Create the order
             $order = Order::create([
-    'user_id' => $user->id,
-    'name' => $request->name,
-    'address' => $request->address,
-    'city' => $request->city,
-    'country' => $request->country,
-    'postcode' => $request->postcode,
-    'phone' => $request->phone,
-    'email' => $request->email,
-    'note' => $request->note,
-    'payment_method' => $request->payment_method,
-    'transaction_number' => $request->transaction_number,
-    'status' => 'pending',
-    'total' => $total,
-]);
+                'user_id' => $user->id,
+                'name' => $request->name,
+                'address' => $request->address,
+                'city' => $request->city,
+                'country' => $request->country,
+                'postcode' => $request->postcode,
+                'phone' => $request->phone,
+                'email' => $request->email,
+                'note' => $request->note,
+                'payment_method' => $request->payment_method,
+                'transaction_number' => $request->transaction_number,
+                'status' => 'pending',
+                'total' => $total,
+            ]);
             // Create order items
             foreach ($cart as $item) {
                 $order->items()->create([
@@ -114,11 +116,12 @@ class OrderController extends Controller
 
         return redirect()->back()->with('success', "Order has been {$status}.");
     }
-}
 
 
-public function myOrders()
-{
-    $orders = auth()->user()->orders()->latest()->paginate(10);
-    return view('website.orders', compact('orders'));
+
+    public function myOrders()
+    {
+        $orders = auth()->user()->orders()->latest()->paginate(10);
+        return view('website.orders', compact('orders'));
+    }
 }

@@ -620,7 +620,51 @@
     content: "\f0a4"
 }
 
-.fa-magnifying-glass-location:before,
+.search-form{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.search-form input{
+    width:220px;
+    padding:10px 15px;
+    border:1px solid #ddd;
+    border-radius:30px;
+    outline:none;
+}
+
+.search-form button{
+    border:none;
+    background:#222;
+    color:white;
+    width:40px;
+    height:40px;
+    border-radius:50%;
+    cursor:pointer;
+}
+
+.search-container {
+  position: relative;
+}
+
+#searchBox {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: 40px;
+  background: white;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+}
+
+#searchBox.active {
+  display: flex;
+  gap: 10px;
+}
+
+.fa-magnifying-glass-location:before,    
 .fa-search-location:before {
     content: "\f689"
 }
@@ -3188,6 +3232,10 @@
 .fa-house-user:before {
     content: "\e1b0"
 }
+
+
+
+
 
 .fa-dumpster-fire:before {
     content: "\f794"

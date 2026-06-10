@@ -12,10 +12,11 @@ class ProductController extends Controller
 {
     public function index(Request $request): View
     {
+        $query = Product::query();
         if ($request->has('search') && $request->search !== '') {
             $query->where('name', 'like', '%' . $request->search . '%');
         }
-        $query = Product::query();
+
         $data = [];
 
         // Default category to null
