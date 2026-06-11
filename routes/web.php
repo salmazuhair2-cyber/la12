@@ -46,6 +46,8 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('admin.profile');
     Route::put('/profile', [ProfileController::class, 'update'])->name('admin.profile.update');
 });
+Route::post('/coupon/apply', [OrderController::class, 'applyCoupon'])
+    ->name('coupon.apply');
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/my-orders', [OrderController::class, 'myOrders'])->name('customer.orders');

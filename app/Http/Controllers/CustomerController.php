@@ -23,30 +23,21 @@ class CustomerController extends Controller
     /**
      * Handle customer login
      */
-    public function authenticate(Request $request): RedirectResponse
+    public function authenticate(Request $request)
     {
         $credentials = $request->validate([
-            'email' => ['required', 'email'],
-            'password' => ['required'],
+            'email' => 'required|email',
+            'password' => 'required',
         ]);
 
         if (Auth::attempt($credentials)) {
-            $user = Auth::user();
-
-            // Check if user is a customer (not an admin)
-            if ($user->type === 'admin') {
-                Auth::logout();
-                throw ValidationException::withMessages([
-                    'email' => ['These credentials are for admin use only.'],
-                ]);
-            }
-
             $request->session()->regenerate();
-            return redirect()->intended(route('website.index'));
+
+            return redirect()->route('website.index');
         }
 
-        throw ValidationException::withMessages([
-            'email' => ['The provided credentials are incorrect.'],
+        return back()->withErrors([
+            'email' => 'Invalid credentials',
         ]);
     }
 

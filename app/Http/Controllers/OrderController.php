@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-
+use App\Models\User;
 use App\Models\Cart;
 use App\Models\Order;
-use App\Models\User;
+use App\Models\Coupon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -123,5 +123,35 @@ class OrderController extends Controller
     {
         $orders = auth()->user()->orders()->latest()->paginate(10);
         return view('website.orders', compact('orders'));
+    }
+
+
+    public function applyCoupon(Request $request)
+    {
+        $request->validate([
+            'code' => 'required'
+        ]);
+
+        $coupon = Coupon::where('code', strtoupper($request->code))->first();
+
+        if (!$coupon) {
+            return back()->with('error', 'Invalid coupon');
+        }
+
+        if (!$coupon->is_active) {
+            return back()->with('error', 'Coupon inactive');
+        }
+
+        if ($coupon->expires_at && now()->gt($coupon->expires_at)) {
+            return back()->with('error', 'Coupon expired');
+        }
+
+        session()->put('coupon', [
+            'code' => $coupon->code,
+            'type' => $coupon->type,
+            'value' => $coupon->value,
+        ]);
+
+        return back()->with('success', 'Coupon applied successfully');
     }
 }

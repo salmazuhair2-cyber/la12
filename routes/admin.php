@@ -6,28 +6,8 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\Admin\CouponController;
 
-// // Admin routes
-// Route::prefix('admin')->name('admin.')->group(function() {
-//     Route::get('/', [AdminController::class, 'index'])->name('index');
-
-//     Route::get('/profile',[AdminController::class,'profile'])->name('profile');
-//     Route::put('/profile',[AdminController::class,'profile_save']);
-//     Route::get('/login',[AdminController::class,'login'])->name('login');
-//     Route::post('/login',[AdminController::class,'store'])->name('login');
-//     Route::get('/orders',[AdminController::class,'orders'])->name('orders');
-//     Route::post('/authenticate', [AdminController::class, 'authenticate'])->name('authenticate');
-
-
-// });
-
-// // Dashboard routes (if needed)
-// Route::prefix('dashboard')->name('dashboard.')->group(function() {
-//     Route::resource('categories', CategoryController::class);
-//     Route::resource('products', ProductController::class);
-
-// });
-// // ->middleware('auth')
 
 Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/login', [AdminController::class, 'login'])->name('login');
@@ -53,6 +33,20 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::post('products/{product}/gallery', [ProductController::class, 'uploadGallery'])->name('products.gallery.upload');
         Route::delete('products/gallery/{image}', [ProductController::class, 'deleteGalleryImage'])->name('products.gallery.delete');
 
-        Route::resource('users',UserController::class);
+        Route::resource('users', UserController::class);
+    });
+});
+
+Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
+
+
+
+    Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () {
+
+        Route::get('/coupons', [CouponController::class, 'index'])->name('coupons.index');
+
+        Route::post('/coupons', [CouponController::class, 'store'])->name('coupons.store');
+
+        Route::delete('/coupons/{coupon}', [CouponController::class, 'destroy'])->name('coupons.destroy');
     });
 });

@@ -87,10 +87,29 @@
                         </tbody>
                     </table>
 
+
                     <div class="payment-method">
                         <div class="checkout-card-header">
                             <span class="checkout-step">2</span>
                             <div>
+
+                                <form action="{{ route('coupon.apply') }}" method="POST" style="margin-bottom:20px;">
+                                    @csrf
+                                    @if(session('coupon'))
+                                    <p>Coupon Applied: {{ session('coupon')['code'] }}</p>
+                                    @endif
+                                    <input
+                                        type="text"
+                                        name="code"
+                                        placeholder="Enter coupon code"
+                                        style="padding:10px; border:1px solid #ccc;"
+                                        required>
+
+                                    <button type="submit" style="padding:10px 15px;">
+                                        Apply
+                                    </button>
+                                </form>
+
                                 <h3 class="checkout-title payment-title">Payment Method</h3>
                                 <p class="checkout-muted">Choose how you want to pay.</p>
                             </div>
