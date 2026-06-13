@@ -16,13 +16,13 @@
                     @method('PUT')
                     <div class="form-row">
                         <div class="form-item">
-                            <label > Name</label>
+                            <label> Name</label>
                             <input type="text" name="name"
                                 class="form-control form-input @error('name')
                             is-invalid @enderror" placeholder="Name"
                                 value="{{ old('name', $category->name) }}" />
                             @error('name')
-                                <small class="invalid-feedback">{{ $message }}</small>
+                            <small class="invalid-feedback">{{ $message }}</small>
                             @enderror
 
                         </div>
@@ -45,7 +45,7 @@
                                 placeholder="Description" cols="30" rows="5">{{ old('description', $category->description) }}</textarea>
 
                             @error('description')
-                                <small class="invalid-feedback">{{ $message }}</small>
+                            <small class="invalid-feedback">{{ $message }}</small>
                             @enderror
 
                         </div>
@@ -66,7 +66,7 @@
     <!-- ------------End of Profile-------------------->
 
 </x-dashboard><x-dashboard>
-    <h1 style= "top: 10%; left: 17%; position: absolute;">Add New Categories </h1>
+    <h1 style="top: 10%; left: 17%; position: absolute;">Add New Categories </h1>
     <a class="back-button" href="{{ route('admin.categories.index') }} ">
         {{-- <button > --}}
         <i class="fas fa-long-arrow-left"></i>
@@ -79,17 +79,17 @@
         </div>
         <div class="container">
             <div class="product-group">
-                <form action="{{ route('admin.categories.update', $category->id) }}"method="PUT" class="form grid">
+                <form action="{{ route('admin.categories.update', $category->id) }}" method="PUT" class="form grid">
                     @csrf
                     <div class="form-row">
                         <div class="form-item">
-                            <label > Name</label>
+                            <label> Name</label>
                             <input type="text" name="name"
                                 class="form-control form-input @error('name')
-                            is-invalid @enderror" "placeholder="Name"
+                            is-invalid @enderror" placeholder="Name"
                                 value="{{ old('name') }}" />
                             @error('name')
-                                <small class="invalid-feedback">{{ $message }}</small>
+                            <small class="invalid-feedback">{{ $message }}</small>
                             @enderror
 
                         </div>
@@ -111,7 +111,7 @@
                                 placeholder="Description" cols="30" rows="5">{{ old('description') }}</textarea>
 
                             @error('description')
-                                <small class="invalid-feedback">{{ $message }}</small>
+                            <small class="invalid-feedback">{{ $message }}</small>
                             @enderror
 
                         </div>

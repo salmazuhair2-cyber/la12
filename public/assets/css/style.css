@@ -1,11 +1,11 @@
 :root{
-    --main-color: #918ffa;
-    --second-color: #ffffff;
+    --main-color: #17b6e2e3;
+    --second-color: #e3e3e3;
     --transparent-color: #2a2a2a8a;
     --header-color: #4a4a4a;
-    --little-par: #ff0505;
+    --little-par: #ff2b2bdb;
     --section-padding: 70px;
-    --little-use-color: red;
+    --little-use-color: rgb(255, 234, 0);
     --transition-duration: 0.5s;
 
 
@@ -32,11 +32,11 @@
 
 .dark-theme-variables {
     --color-background: var(--header-color);
-    --second-color: #202528;
+    --second-color: #191919;
     --color-dark: #edeffd;
     --color-dark-variant: #a3bdcc;
     --color-light: rgba(230, 230, 230, 0.4);
-    --box-shadow: 3px 2rem 3rem rgba(123, 139, 200, 0.18);
+    --box-shadow: 3px 2rem 3rem rgba(75, 79, 99, 0.18);
     --border-form: 1px solid rgba(255, 255, 255, 0.516);
   --color-warning:#ffffff;
 
@@ -237,10 +237,12 @@ a {
   .dashboard b {
     color: var(--color-dark);
   }
-  .dashboard h1 {
-    font-weight: 800;
-    font-size: 1.8rem;
-  }
+  .dashboard h1{
+    color:#3e3e3e;
+    color: var(--color-dark);
+    font-weight:700;
+    font-size:2.2rem;
+}
 
   .dashboard h2 {
     font-size: 1.4rem;
@@ -416,6 +418,32 @@ a {
     display: flex;
   }
 
+ .coupons-page .table{
+    background:white;
+    border-radius:15px;
+    overflow:hidden;
+    box-shadow:0 5px 20px rgba(0,0,0,.08);
+}
+
+
+                              /*---------coupon admin section------------*/
+
+.coupons-page .table th{
+    background:#f5f5fb;
+    color:#27374d;
+    border:none;
+    padding:18px;
+}
+
+.coupons-page .table td{
+    border:none;
+    padding:18px;
+    text-align:center;
+}
+
+.coupons-page .table tr{
+    border-bottom:1px solid #eee;
+}
   /* -------------------------MAIN-----------------------
   ------------------------------------------------------------ */
 
@@ -424,15 +452,13 @@ a {
     position: relative;
   }
   .spacial-content > h1 {
+    
     top: -5px;
     z-index: 9;
     font-size: 37px;
-    background-image: linear-gradient(
-      to right bottom,
-      #a6aafe,
-      #83c0fc,
-      #87ceeb
-    );
+    background-color: #464646;
+    color: var(--color-dark);
+   
     background-clip: text;
     -webkit-text-fill-color: transparent;
     position: fixed;
@@ -821,6 +847,7 @@ a {
     }
     .dashboard .spacial-content > h1{
       position: relative;
+      color: var(--color-dark);
       z-index: 2;
   }
   .dashboard aside .sidebar2   a i{
@@ -925,6 +952,77 @@ a {
     .dashboard .right .top button span {
       font-size: 2rem;
     }
+
+
+.dashboard-alert-overlay{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.45);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    z-index:999999;
+}
+
+.dashboard-alert-card{
+    width:450px;
+    background:white;
+    padding:35px;
+    border-radius:20px;
+    text-align:center;
+    box-shadow:0 20px 40px rgba(0,0,0,.2);
+}
+
+.dashboard-alert-card.error{
+    border-top:5px solid #dc3545;
+}
+
+.dashboard-alert-icon{
+    width:70px;
+    height:70px;
+    margin:auto;
+    border-radius:50%;
+    background:#28a745;
+    color:white;
+    font-size:30px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.dashboard-alert-card.error .dashboard-alert-icon{
+    background:#dc3545;
+}
+
+.dashboard-alert-actions{
+    display:flex;
+    justify-content:center;
+    gap:10px;
+    margin-top:20px;
+}
+
+.alert-btn{
+    padding:12px 20px;
+    border:none;
+    border-radius:8px;
+    text-decoration:none;
+    cursor:pointer;
+    font-weight:600;
+}
+
+.alert-btn.primary{
+    background:var(--main-color);
+    color:white;
+}
+
+.alert-btn.secondary{
+    background:#ececec;
+    color:#333;
+}
+
+
+
+
   }
   /* -------------------------Profile Admin----------------------
   ------------------------------------------------------------ */
@@ -1195,9 +1293,23 @@ a {
   }
   .all-cart-section .table tr {
     border: var(--border-form);
+    background: var(--second-color);
 
   }
-  .cart-section .table th, .all-cart-section .table th
+
+
+                       /*-----cart table section-----*/
+
+.all-cart-section .table{
+    width: 100%;
+    background: rgb(229, 228, 228);
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 5px 20px rgba(0,0,0,.08);
+    border-collapse: collapse;
+}
+
+  .cart-section .table th, .all-cart-section .table th,
   .cart-section .table td ,.all-cart-section .table td {
     display: table-cell;
     min-width: 50px;
@@ -1208,16 +1320,27 @@ a {
     overflow-wrap: break-word;
     height: 6vh;
   }
-  .all-cart-section .table td{
-    border: var(--border-form);
+ .all-cart-section .table td{
+  color: var(--color-dark);
+    border: none;
+    padding: 18px;
+    text-align: center;
+}
+ .all-cart-section .table th{
+    padding: 18px;
+    border: none;
+    background: #2b2b2b;
+    color: #fffefe;
+    font-weight: 600;
+}
 
-  }
-  .all-cart-section .table th{
-    padding: 10px;
-    border: var(--border-form);
-  background-color: var(--color-dark);
-  color: var(--second-color);
-  }
+.all-cart-section .table tr{
+    border-bottom: 1px solid #aba6a6;
+}
+
+.all-cart-section .table tr:last-child{
+    border-bottom: none;
+}
   .cart-section .table tr:last-child,
    .all-cart-section .table:last-child {
     border-bottom: var(--border-form);
@@ -1368,6 +1491,7 @@ a {
     border-bottom: none;
   }
   .cart-section .spacial-content > h1 {
+    
     padding: 40px 0;
   }
   .cart-section .spacial-content > h1 span {
@@ -1473,6 +1597,8 @@ a {
     .our-orders .table .actions button:hover{
     background-color: var(--color-dark);
     }
+
+    
 
   /* ==============================ِADMIN LOGIN======================== */
 .admin-login .container {

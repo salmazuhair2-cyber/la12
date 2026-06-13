@@ -93,6 +93,9 @@
                             <span class="checkout-step">2</span>
                             <div>
 
+
+
+                                <h3 class="checkout-title payment-title">Payment Method</h3>
                                 <form action="{{ route('coupon.apply') }}" method="POST" style="margin-bottom:20px;">
                                     @csrf
                                     @if(session('coupon'))
@@ -109,12 +112,14 @@
                                         Apply
                                     </button>
                                 </form>
-
-                                <h3 class="checkout-title payment-title">Payment Method</h3>
                                 <p class="checkout-muted">Choose how you want to pay.</p>
                             </div>
                         </div>
                         <div class="payment-option flex">
+
+
+
+
                             <input type="radio" name="payment_method" value="cash" checked class="payment-input" onchange="togglePaymentInfo()">
                             <label class="payment-label">Cash on Delivery - الدفع عند الاستلام</label>
                         </div>

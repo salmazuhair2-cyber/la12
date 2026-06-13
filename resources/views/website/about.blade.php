@@ -9,7 +9,7 @@
       <div class="section1">
         <div class="text">
           <h2>Buy Everything
-            <strong>Easily</strong>
+            Easily
             With Our Service
           </h2>
           <p>We make shopping easy, fast and fun. Explore our wide selection of men's and women's clothing, shoes and accessories, with our easy-to-use website and excellent customer service, you can find everything you need in one place.</p>

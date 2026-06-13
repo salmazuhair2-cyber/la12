@@ -2,7 +2,7 @@
 
 
     {{-- <h1 style= "top: 10%; left: 17%; position: absolute;">All Products </h1> --}}
-    @include('components.alert')
+
 
 
     <a class="back-button" href="{{ route('admin.products.create') }} ">
@@ -17,7 +17,7 @@
 
 
 
-    <section class="all-cart-section">
+    <section class="all-cart-section coupons-page">
         <div class="container">
 
             <table class="table">
@@ -49,7 +49,7 @@
                                     <i class="fa-solid fa-images"></i> Gallery
                                 </button>
                             </a>
-                            <a class="update" href="{{ route('admin.products.edit', $product->id) }}">
+                            <a class="update" href="{{ route('admin.products.edit', $product->id) }} ">
                                 <button><i class="fas fa-edit"></i>Edit</button>
                             </a>
                             <form action="{{ route('admin.products.destroy', $product->id) }}" method="POST"
@@ -57,12 +57,11 @@
                                 @csrf
                                 @method('DELETE')
                                 <a href="" class="delete"><button type="submit"
-                                        onclick="return confirm('Are You Sure?')"><i
-                                            class="fas fa-trash"></i>Delete</button></a>
+                                        onclick="return confirm('Are You Sure?')"> <i class="fas fa-trash"></i>Delete</button></a>
                             </form>
                         </td>
                     </tr>
-                @empty
+                    @empty
                     <tr>
                         <td colspan="7" class="text-center "> No Data Found</td>
                     </tr>

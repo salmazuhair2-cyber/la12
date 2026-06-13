@@ -35,18 +35,5 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
         Route::resource('users', UserController::class);
     });
-});
-
-Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
-
-
-
-    Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () {
-
-        Route::get('/coupons', [CouponController::class, 'index'])->name('coupons.index');
-
-        Route::post('/coupons', [CouponController::class, 'store'])->name('coupons.store');
-
-        Route::delete('/coupons/{coupon}', [CouponController::class, 'destroy'])->name('coupons.destroy');
-    });
+    Route::resource('coupons', CouponController::class);
 });

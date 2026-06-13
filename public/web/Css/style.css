@@ -10,7 +10,7 @@
     /* ------------------------ */
     --color-primary: var(--main-color);
     --color-danger: var(--little-par);
-    --color-success: #41f1b6;
+    --color-success: #55aade;
     --color-warning: #000000;
     --color-info-dark: #7d8da1;
     --color-info-light: #dce1ed;
@@ -2784,7 +2784,11 @@
 
   /* >>>>>>>>>>>>>>>>>>>>>>>>>>>>> */
   /* Start section logo */
-
+.brand-logo{
+    width: 35px;
+    height: 35px;
+    object-fit: contain;
+}
   .logo-section {
     padding-bottom: var(--section-padding);
     padding-top: var(--section-padding);

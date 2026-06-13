@@ -67,10 +67,9 @@ class ProductController extends Controller
                 'type' => 'main',
             ]);
         }
-
         return redirect()
             ->route('admin.products.index')
-            ->with('success', 'Product added successfully!');
+            ->with('success', 'Product added successfully');
     }
 
 
@@ -92,7 +91,7 @@ class ProductController extends Controller
         $categories = Category::select('id', 'name')->get();
         $genders = Product::GENDERS;
 
-        return view('dashboard.products.edit', compact('product', 'categories', 'genders'));
+        return view('dashboard.products.edit', compact('product', 'categories', 'genders'))->with('success', 'Product updated successfully');
     }
 
     /**
@@ -185,7 +184,7 @@ class ProductController extends Controller
             }
         }
 
-        return back()->with('success', 'Images uploaded successfully!');
+        return back()->with('success', 'Product deleted successfully');
     }
 
     // Delete image

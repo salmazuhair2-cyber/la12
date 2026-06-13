@@ -50,9 +50,12 @@ class CategoryController extends Controller
             'path' => $img_name,
         ]);
 
-        return redirect()
-            ->route('admin.categories.index')
-            ->with('success', 'Category created successfully!');
+        return redirect()->route('admin.categories.index')->with('alert', [
+            'action'         => 'create',
+            'message'        => 'Category created successfully!',
+            'back_route'     => route('admin.categories.index'),
+            'continue_route' => route('admin.categories.create'),
+        ]);
     }
 
 
@@ -98,9 +101,12 @@ class CategoryController extends Controller
                 ]);
             }
         }
-        return redirect()
-            ->route('admin.categories.index')
-            ->with('info', 'Category updated successfully!');
+        return redirect()->route('admin.categories.index')->with('alert', [
+            'action'         => 'update',
+            'message'        => 'Category updated successfully!',
+            'back_route'     => route('admin.categories.index'),
+            'continue_route' => route('admin.categories.edit', $category),
+        ]);
     }
 
 
@@ -112,8 +118,11 @@ class CategoryController extends Controller
     {
         $category->delete();
 
-        return redirect()
-            ->route('admin.categories.index')
-            ->with('success', 'Category deleted successfully!');
+        return redirect()->route('admin.categories.index')->with('alert', [
+            'action'         => 'delete',
+            'message'        => 'Category deleted successfully!',
+            'back_route'     => route('admin.categories.index'),
+            'continue_route' => null,
+        ]);
     }
 }

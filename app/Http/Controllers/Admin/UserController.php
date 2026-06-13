@@ -20,37 +20,40 @@ class UserController extends Controller
         return view('dashboard.users.index', compact('users'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+    /* Show the form for creating a new resource. */
     public function create()
     {
         $roles = User::ROLES;
         $user = new User();
-        return view('dashboard.users.create',compact('roles','user'));
+        return view('dashboard.users.create', compact('roles', 'user'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
     public function store(UserRequest $request)
-{
-    if (!auth()->user()->is_super_admin) {
-        return redirect()->back()->with('error', 'Unauthorized!');
+    {
+        if (!auth()->user()->is_super_admin) {
+            return redirect()->back()->with('error', 'Unauthorized!');
+        }
+
+        $data = $request->except('password', 'avatar');
+
+        $data['password'] = Hash::make($request->password);
+
+        if ($request->hasFile('avatar')) {
+            $data['avatar'] = $request->file('avatar')->store('avatars', 'public');
+        }
+
+        User::create($data);
+
+        return redirect()->route('admin.users.index')->with('alert', [
+            'action'         => 'create',
+            'message'        => 'User created successfully!',
+            'back_route'     => route('admin.users.index'),
+            'continue_route' => route('admin.users.create'),
+        ]);
     }
-
-    $data = $request->except('password', 'avatar');
-    
-    $data['password'] = Hash::make($request->password);
-
-    if ($request->hasFile('avatar')) {
-        $data['avatar'] = $request->file('avatar')->store('avatars', 'public');
-    }
-
-    User::create($data);
-
-    return redirect()->route('admin.users.index')->with('success', 'User created successfully!');
-}
 
 
 
@@ -67,8 +70,7 @@ class UserController extends Controller
     public function edit(User $user)
     {
         $roles = User::ROLES;
-        return view('dashboard.users.edit', compact('user','roles'));
-
+        return view('dashboard.users.edit', compact('user', 'roles'));
     }
 
     /**
@@ -79,28 +81,33 @@ class UserController extends Controller
         if (!auth()->user()->is_super_admin) {
             return redirect()->back()->with('error', 'Unauthorized!');
         }
-    
+
         $data = $request->except('password', 'avatar');
-        
+
         if ($request->filled('password')) {
             $data['password'] = Hash::make($request->password);
         }
-    
+
         if ($request->hasFile('avatar')) {
             if ($user->avatar && Storage::disk('public')->exists($user->avatar)) {
                 Storage::disk('public')->delete($user->avatar);
             }
-    
+
             $data['avatar'] = $request->file('avatar')->store('avatars', 'public');
         }
-    
+
         $user->update($data);
-    
-        return redirect()->route('admin.users.index')->with('success', 'User updated successfully!');
+
+        return redirect()->route('admin.users.index')->with('alert', [
+            'action'         => 'update',
+            'message'        => 'User updated successfully!',
+            'back_route'     => route('admin.users.index'),
+            'continue_route' => route('admin.users.edit', $user),
+        ]);
     }
-    
-    
-    
+
+
+
 
     /**
      * Remove the specified resource from storage.
@@ -110,10 +117,14 @@ class UserController extends Controller
         if ($user->avatar && Storage::disk('public')->exists($user->avatar)) {
             Storage::disk('public')->delete($user->avatar);
         }
-    
+
         $user->delete();
-    
-        return redirect()->route('admin.users.index')->with('success', 'User deleted successfully!');
+
+        return redirect()->route('admin.users.index')->with('alert', [
+            'action'         => 'delete',
+            'message'        => 'User deleted successfully!',
+            'back_route'     => route('admin.users.index'),
+            'continue_route' => null,
+        ]);
     }
-    
 }

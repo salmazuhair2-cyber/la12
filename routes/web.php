@@ -9,6 +9,7 @@ use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\WishlistController;
 
+
 Route::get('/', [WebsiteController::class, 'index'])->name('website.index');
 Route::get('/about', [WebsiteController::class, 'about'])->name('website.about');
 Route::get('/cart', [CartController::class, 'index'])->name('website.cart.index');

@@ -24,41 +24,44 @@
                 </tr>
                 <tbody>
                     @forelse($users as $user)
-                        <tr>
-                            <td>{{ $loop->iteration }}</td>
-                            <td>
-                                @if($user->avatar)
-                                    <img width="100" height="100" class="table-img" src="{{ asset('images/' . $user->avatar) }}" />
-                                @else
-                                    <span>No Avatar</span>
-                                @endif
-                            </td>
-                            <td>{{ $user->name }}</td>
-                            <td>{{ $user->email }}</td>
-                            <td>{{ ucfirst($user->getRoleLabel()) }}</td>
-                            @if(auth()->user()->is_super_admin)
-                            <td class="actions">
-                                <a class="update" href="{{ route('admin.users.edit', $user->id) }}">
-                                    <button><i class="fas fa-edit"></i>Edit</button>
-                                </a>
-
-                                <form action="{{ route('admin.users.destroy', $user->id) }}" method="POST"
-                                    style="display: inline; margin-left: 5px;">
-                                    @csrf
-                                    @method('DELETE')
-                                    <a href="" class="delete">
-                                        <button type="submit" onclick="return confirm('Are you sure?')">
-                                            <i class="fas fa-trash"></i>Delete
-                                        </button>
-                                    </a>
-                                </form>
-                            </td>
+                    <tr>
+                        <td>{{ $loop->iteration }}</td>
+                        <td>
+                            @if($user->avatar)
+                            <img width="100" height="100" class="table-img" src="{{ asset('images/' . $user->avatar) }}" />
+                            @else
+                            <span>No Avatar</span>
                             @endif
-                        </tr>
+                        </td>
+                        <td>{{ $user->name }}</td>
+                        <td>{{ $user->email }}</td>
+                        <td>{{ ucfirst($user->getRoleLabel()) }}</td>
+                        @if(auth()->user()->is_super_admin)
+                        <td class="actions">
+                            <a class="update" href="{{ route('admin.users.edit', $user->id) }}">
+                                <button><i class="fas fa-edit"></i>Edit</button>
+                            </a>
+
+                            <form id="delete-user-{{ $user->id }}"
+                                action="{{ route('admin.users.destroy', $user->id) }}"
+                                method="POST"
+                                style="display:none;">
+                                @csrf
+                                @method('DELETE')
+                            </form>
+
+                            <a href="#" class="delete" onclick="confirmDelete('delete-user-{{ $user->id }}'); return false;">
+                                <button type="button">
+                                    <i class="fas fa-trash"></i>Delete
+                                </button>
+                            </a>
+                        </td>
+                        @endif
+                    </tr>
                     @empty
-                        <tr>
-                            <td  @if(auth()->user()->is_super_admin) colspan="6" @else colspan="5" @endif class="text-center">No Users Found</td>
-                        </tr>
+                    <tr>
+                        <td @if(auth()->user()->is_super_admin) colspan="6" @else colspan="5" @endif class="text-center">No Users Found</td>
+                    </tr>
                     @endforelse
                 </tbody>
             </table>
