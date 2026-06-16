@@ -1,152 +1,116 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{{ env('APP_NAME')}} - Admin Login</title>
-    <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}" />
-    <!--Render All Element Normally-->
-    <link rel="stylesheet" href="{{ asset('assets/CSS/normalize.css') }}" />
-    <!-- Webfont library -->
-    <link rel="stylesheet" href="{{ asset('assets/CSS/all.min.css') }}" />
-    <!-- Google font link -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&family=Concert+One&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap"
-      rel="stylesheet"
-    />
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <!-- google icons link -->
-    <link
-      href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp"
-      rel="stylesheet"
-    />
 
-    <!-- Font Awesome link -->
-    <script
-      src="https://kit.fontawesome.com/c1a12a9bed.js"
-      crossorigin="anonymous"
-    ></script>
-    <!-- Bootstrap link -->
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css"
-      rel="stylesheet"
-    />
-    <style>
-      .alert {
-        background-color: #ffebee;
-        color: #d32f2f;
-        padding: 15px;
-        margin-bottom: 20px;
-        border: 1px solid #ef9a9a;
-        border-radius: 4px;
-      }
-      .alert ul {
-        margin: 0;
-        padding-left: 20px;
-      }
-      .alert li {
-        margin: 5px 0;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="admin-login">
-      <div class="container">
-          <div class="forms-container">
-              <div class="signin-signup">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{{ config('app.name') }} - Admin Login</title>
+  <link rel="stylesheet" href="{{ asset('assets/CSS/normalize.css') }}" />
+  <link rel="stylesheet" href="{{ asset('assets/CSS/all.min.css') }}" />
+  <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300..700&display=swap" rel="stylesheet" />
+  <script src="https://kit.fontawesome.com/c1a12a9bed.js" crossorigin="anonymous"></script>
 
-                  <!-- Sign In Form -->
-                  <form action="{{ route('admin.authenticate') }}" method="POST" class="sign-in-form">
-                      @csrf
-                      <h2 class="title">Admin Sign in</h2>
-
-                      @if ($errors->any())
-                      <div class="alert">
-                          <ul>
-                              @foreach ($errors->all() as $error)
-                                  <li>{{ $error }}</li>
-                              @endforeach
-                          </ul>
-                      </div>
-                      @endif
-                      <div class="input-field login__box">
-                          <input type="email" name="email" id="email" value="{{ old('email') }}" required placeholder=" " class="login__input">
-                          <label for="email" class="login__label">Email</label>
-                          <i class="fa-solid fa-envelope ri-mail-fill login__icon"></i>
-                      </div>
-                      <div class="login__box">
-                        <input type="password" name="password" id="password" required placeholder=" " class="login__input">
-                        <label for="password" class="login__label">Password</label>
-                        <i class="fas fa-eye-slash login__icon login__password" id="loginPassword"></i>
-                      </div>
-
-                     <div class="remember">
-                        <label class="custom-control-label" for="remember">
-                        <input type="checkbox" name="remember" class="custom-control-input" id="remember">
-                            Remember Me </label>
-                      <a href="#" class="login__forgot">Forgot your password?</a>
-                    </div>
-                      <button type="submit" class="login__button">Login</button>
-
-                      <div class="login__social">
-                        <p class="login__social-title">Or login with</p>
-
-                        <div class="login__social-links">
-                           <a href="#" class="login__social-link">
-                              <img src="{{ asset('assets/images/icon-google.svg') }}" alt="image" class="login__social-img">
-                           </a>
-
-                           <a href="#" class="login__social-link">
-                              <img src="{{ asset('assets/images/icon-facebook.svg') }}" alt="image" class="login__social-img">
-                           </a>
-
-                           <a href="#" class="login__social-link">
-                              <img src="{{ asset('assets/images/icon-apple.svg') }}" alt="image" class="login__social-img">
-                           </a>
-                        </div>
-                     </div>
-                  </form>
+  <link rel="stylesheet" href="{{ asset('web/css/auth.css') }}?v={{ time() }}">
 
 
-              </div>
-          </div>
+</head>
 
-          <!-- Panels Container -->
-          <div class="panels-container">
-                {{-- Left Panel --}}
-               <div class="panel left-panel">
+<body>
 
-                  <img src="{{ asset('assets/images/undraw_welcome-cats_tw36 (2).svg') }}" class="image" alt="Login Illustration" />
+  <div class="admin-auth-page">
+    <div class="admin-left">
+      <div class="blob b1"></div>
+      <div class="blob b2"></div>
+      <div class="blob b3"></div>
 
-              </div>
-          </div>
+      <div class="shield-icon">
+        <i class="fas fa-shield-alt"></i>
       </div>
+      <h2>Admin Panel</h2>
+      <div class="bar"></div>
+      <p>Secure access for authorized administrators only.</p>
+      <div class="restricted-badge">RESTRICTED ACCESS</div>
     </div>
 
+    <div class="admin-right">
+      <div class="admin-right-head">
+        <h3>Sign in to dashboard</h3>
+        <p>Enter your credentials to continue</p>
+      </div>
 
+      @if ($errors->any())
+      <div class="error-box">
+        <ul>
+          @foreach ($errors->all() as $error)
+          <li>{{ $error }}</li>
+          @endforeach
+        </ul>
+      </div>
+      @endif
 
+      <form action="{{ route('admin.authenticate') }}" method="POST">
+        @csrf
 
-    {{-- <script src="{{ asset('assets/js/dashbord.js') }}"></script> --}}
-    <script>
-      document.addEventListener("DOMContentLoaded", function() {
-        const togglePassword = document.getElementById('loginPassword');
-        if (togglePassword) {
-          togglePassword.addEventListener('click', function () {
-            const passwordInput = document.getElementById('password');
-            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
-            passwordInput.setAttribute('type', type);
-            this.classList.toggle('fa-eye');
-            this.classList.toggle('fa-eye-slash');
-          });
-        }
+        <div class="a-field">
+          <label>Email Address</label>
+          <div class="a-field-wrap">
+            <i class="fas fa-envelope"></i>
+            <input type="email"
+              name="email"
+              value="{{ old('email') }}"
+              placeholder="admin@example.com"
+              required>
+          </div>
+        </div>
 
+        <div class="a-field">
+          <label>Password</label>
+          <div class="a-field-wrap">
+            <i class="fas fa-lock"></i>
+            <input type="password"
+              name="password"
+              id="adminPass"
+              placeholder="••••••••"
+              required>
+            <button type="button" class="eye-btn" onclick="togglePass()">
+              <i class="fas fa-eye-slash" id="eyeIcon"></i>
+            </button>
+          </div>
+        </div>
 
-      });
+        <div class="a-row">
+          <label class="a-remember">
+            <input type="checkbox" name="remember" style="accent-color:#3b6cb7;"> Remember me
+          </label>
+          <a href="#" class="a-forgot">Forgot password?</a>
+        </div>
 
+        <button type="submit" class="a-btn">
+          <i class="fas fa-sign-in-alt"></i>
+          Sign in to dashboard
+        </button>
+      </form>
 
-    </script>
-  </body>
+      <div class="a-footer-note">
+        Protected area — unauthorized access is prohibited
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function togglePass() {
+      const input = document.getElementById('adminPass');
+      const icon = document.getElementById('eyeIcon');
+      if (input.type === 'password') {
+        input.type = 'text';
+        icon.classList.replace('fa-eye-slash', 'fa-eye');
+      } else {
+        input.type = 'password';
+        icon.classList.replace('fa-eye', 'fa-eye-slash');
+      }
+    }
+  </script>
+
+</body>
+
 </html>

@@ -28,7 +28,8 @@
       <div class="blob blob-2"></div>
       <div class="blob blob-3"></div>
       <div class="brand">
-        <span class="brand-name"><span class="brand-dot"></span>
+        <span class="brand-name">
+          <span class="brand-dot"></span>
           <img src="{{ asset('assets/images/logo2.png') }}" alt="logo" class="brand-logo">
 
         </span>

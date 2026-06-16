@@ -37,7 +37,7 @@
                         shoes, we have everything you need to add a unique touch to your
                         look.
                     </p>
-                    <span>Shatha & Haya - </span><span>CEO AnyWhere</span>
+                    <span>S & - </span><span>CEO AnyWhere</span>
                 </div>
             </div>
         </div>
@@ -145,23 +145,12 @@
     <!-- Start designer -->
     <div class="designer" data-aos="fade-up" data-aos-duration="2000">
         <div class="container">
-            <h4>
-                <i class="fas fa-quote-left"></i>
-                This website has been carefully designed to provide a unique and easy
-                shopping experience for users. Using modern user interface development
-                techniques, the focus has been on providing a simple and responsive
-                design that allows the user to navigate smoothly between sections and
-                products.
-                <i class="fas fa-quote-right"></i>
-            </h4>
-            <div class="design">
-                <img src="{{ asset('web/images/designer1.jpg') }}" alt="ShathaDoghmosh" />
-                <div class="content">
-                    <h2>Shatha doghmosh</h2>
-                    <span>Designer</span>
-                </div>
-            </div>
+
+
+
         </div>
+    </div>
+    </div>
     </div>
     <!-- End designer -->
     <!-- Start latest arrivals -->

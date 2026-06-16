@@ -98,7 +98,7 @@ return $item->product->price;
                             <li><a href="{{ route('website.cart.index') }}">My Cart</a></li>
                             <li><a href="{{ route('website.checkout') }}">My Checkout</a></li>
                             <li><a href="{{ route('website.wishlist.index') }}">My Wishlist</a></li>
-                            <li><a href="https://github.com/Shatha492002" target="_blank">My Account in github</a></li>
+                            <li><a href="https://github.com/salmazuhair2-cyber" target="_blank">My Account in github</a></li>
                         </ul>
                         <div class="best-sellers">
                             <h3>Best Sellers</h3>
@@ -256,7 +256,22 @@ return $item->product->price;
     <script src="{{ asset('web/js/main.js') }}" defer></script>
 
     @stack('scripts')
-
+    {{-- Order Success Alert --}}
+    @if(session('order_success'))
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            Swal.fire({
+                icon: 'success',
+                title: '{{ session("order_success.title") }}',
+                html: '{{ session("order_success.message") }}<br><br><small style="color:#888;">Order #{{ session("order_success.order_id") }}</small>',
+                confirmButtonText: 'Continue Shopping',
+                confirmButtonColor: '#ff3496',
+                allowOutsideClick: false,
+            });
+        });
+    </script>
+    @endif
 </body>
 
 </html>

@@ -23,6 +23,9 @@ class Order extends Model
         'payment_account',
         'status',
         'total',
+        'subtotal',    // ← أضف
+        'discount',    // ← أضف
+        'coupon_code', // ← أضف
     ];
 
     public function items()

@@ -197,13 +197,8 @@
   .spacial-content > h1 {
     font-size: 43px;
     background-color: var(--main-color);
-    background-image: radial-gradient(
-      circle,
-      #87ceeb,
-      #d1eafd,
-      #d7e4fd,
-      #b2a3fb
-    );
+   background-color: #1a1a1a;
+    
     background-clip: text;
     -webkit-text-fill-color: transparent;
     position: relative;
@@ -1085,6 +1080,7 @@
   /* <!-- start view product --> */
   #font {
     font-size: 50px;
+    background-color: #1a1a1a;
     padding: 0;
   }
   .view {
@@ -1108,48 +1104,56 @@
 
   .view .container .image {
     position: relative;
-    width: 300px;
-    height: 300px;
-    border-radius: 50%;
+    width: 320px;
+    height: 420px;
     overflow: hidden;
-    cursor: pointer;
-    transition: var(--transition-duration) ease;
-  }
+    border-radius: 24px;
+}
 
-  .view .container .image:hover {
-    transform: scale(1.1);
-  }
-  .view .container .image::before {
-    content: "";
+.container .image {
+    padding: 15px;
+    border-radius: 24px;
+    
+    border-radius: 15px;
+}
+
+.view .container .image .button {
     position: absolute;
-    top: 0;
-    left: 0;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    
+    padding: 12px 24px;
+    border-radius: 50px;
+
+    background: rgba(255,255,255,.9);
+    backdrop-filter: blur(10px);
+
+    transition: .3s ease;
+}
+
+.view .container .image:hover .button {
+    bottom: 30px;
+    background-color:#ff3496 ;
+}
+
+/**/
+.view .container .image {
+ height   : 320px;
+   width : 420px;
+    background: white;
+    border-radius: 24px;
+    padding: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,.08);
+}
+
+.view .container .image img {
     width: 100%;
-    height: 100%;
-    background: var(--transparent-color);
-    transition: opacity 0.3s ease;
-    border-radius: 50%;
-    opacity: 1;
-  }
-  .view .container .image:hover::before {
-    opacity: 0;
-  }
-
-  .view .container .image img {
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    transition: transform 1s ease, border-radius 0.3s ease;
-  }
-  .view .container .image a {
-    color: var(--header-color);
-  }
-
-  .view .container .image:hover .button {
-    transform: scale(1.4);
-    overflow: hidden;
-  }
-
+    height: 250px;
+    border-radius: 18px;
+    object-fit: cover;
+}
+/**/
   .view .button {
     position: absolute;
     left: 20px;
@@ -1214,6 +1218,7 @@
 
   .container .image img {
     max-width: 100%;
+
   }
   .container .content {
     padding: 20px;
@@ -1237,7 +1242,7 @@
 
   .content span {
     font-size: 18px;
-    color: red;
+    color: rgb(42, 42, 42);
     font-weight: 700;
   }
 
@@ -1340,21 +1345,7 @@
   .category-title2 {
     text-align: center;
     font-size: 40px;
-    background-image: radial-gradient(
-      circle,
-      #87ceeb,
-      #80c4f8,
-      #90b6ff,
-      #b2a3fb,
-      #d88ce7,
-      #d376c4,
-      #c961a1,
-      #bb4f80,
-      #8a3d5d,
-      #5b2b3d,
-      #301a21,
-      #000000
-    );
+    background-color: #1a1a1a;
     background-clip: text;
     -webkit-text-fill-color: transparent;
     margin-top: 50px;
@@ -1363,8 +1354,8 @@
     display: inline-block;
     overflow: hidden;
     white-space: nowrap;
-    animation: typing 2s steps(30) 1s forwards;
-    position: relative;
+    width:100%;
+    
   }
 
   .category-title2 {
@@ -2626,6 +2617,7 @@
   .about-details .section1 .image img,
   .why .container .image img {
     max-width: 100%;
+    
     width: 460px;
     border-radius: 20px;
     opacity: 0;
@@ -2643,13 +2635,8 @@
 
   /* Centered Text Section */
   .center-text {
-    background: linear-gradient(
-      to left,
-      #f8409c,
-      #d88ce7,
-      #83c0fc,
-      #87ceeb
-    );
+    background-color: #1a1a1a;
+    
     color: white;
   }
   .center-text .container {
@@ -2784,11 +2771,7 @@
 
   /* >>>>>>>>>>>>>>>>>>>>>>>>>>>>> */
   /* Start section logo */
-.brand-logo{
-    width: 35px;
-    height: 35px;
-    object-fit: contain;
-}
+
   .logo-section {
     padding-bottom: var(--section-padding);
     padding-top: var(--section-padding);
@@ -3787,7 +3770,7 @@
   }
   .cart-dropdown .cart-subtotal span ,
   .wishlist-dropdown .wishlist-subtotal span{
-    color: var(--little-use-color);
+    color:#1a1a1a;
   font-size: 18px;
   }
 
@@ -4155,7 +4138,7 @@
     align-items: center;
     gap: 10px;
     padding: 10px 20px;
-    color: var(--main-color);
+    color:#1a1a1a;
     text-decoration: none;
     transition: background-color 0.3s ease;
     border: none;
@@ -4163,13 +4146,13 @@
     width: 100%;
     text-align: left;
     cursor: pointer;
-    font-size: 14px;
+    font-size: 18px;
   }
 
   .user-dropdown .dropdown-content a:hover,
   .user-dropdown .dropdown-content button:hover {
     background-color: var(--little-par);
-    color: var(--second-color);
+    color:#1a1a1a;
   }
 
   .user-dropdown .dropdown-content i {

@@ -8,7 +8,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\WishlistController;
-
+use App\Http\Controllers\CouponController;
 
 Route::get('/', [WebsiteController::class, 'index'])->name('website.index');
 Route::get('/about', [WebsiteController::class, 'about'])->name('website.about');
@@ -47,9 +47,13 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('admin.profile');
     Route::put('/profile', [ProfileController::class, 'update'])->name('admin.profile.update');
 });
-Route::post('/coupon/apply', [OrderController::class, 'applyCoupon'])
-    ->name('coupon.apply');
+
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/my-orders', [OrderController::class, 'myOrders'])->name('customer.orders');
 });
+
+
+
+Route::post('/coupon/apply', [CouponController::class, 'apply'])->name('coupon.apply');
+Route::post('/coupon/remove', [CouponController::class, 'remove'])->name('coupon.remove');

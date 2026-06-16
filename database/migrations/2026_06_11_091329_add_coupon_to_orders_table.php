@@ -12,8 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('orders', function (Blueprint $table) {
+            if (!Schema::hasColumn('orders', 'subtotal')) {
+                $table->decimal('subtotal', 8, 2)->default(0)->after('total');
+            }
             if (!Schema::hasColumn('orders', 'discount')) {
-                $table->decimal('discount', 8, 2)->default(0)->after('total');
+                $table->decimal('discount', 8, 2)->default(0)->after('subtotal');
             }
             if (!Schema::hasColumn('orders', 'coupon_code')) {
                 $table->string('coupon_code')->nullable()->after('discount');
@@ -24,7 +27,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('orders', function (Blueprint $table) {
-            $table->dropColumn(['discount', 'coupon_code']);
+            $table->dropColumn(['subtotal', 'discount', 'coupon_code']);
         });
     }
 };

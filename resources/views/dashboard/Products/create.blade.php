@@ -21,9 +21,9 @@
                                 class="form-control form-input @error('name') is-invalid @enderror" placeholder="Name"
                                 value="{{ old('name') }}" />
                             @error('name')
-                                <div class="alert alert-danger mt-2 p-2">
-                                    <i class="fas fa-exclamation-circle"></i> {{ $message }}
-                                </div>
+                            <div class="alert alert-danger mt-2 p-2">
+                                <i class="fas fa-exclamation-circle"></i> {{ $message }}
+                            </div>
                             @enderror
                         </div>
                     </div>
@@ -36,9 +36,9 @@
                             <input type="file" onchange="showImg(event, 'previewProductImg')" name="image"
                                 class="form-input @error('image') is-invalid @enderror" />
                             @error('image')
-                                <div class="alert alert-danger mt-2 p-2">
-                                    <i class="fas fa-exclamation-circle"></i> {{ $message }}
-                                </div>
+                            <div class="alert alert-danger mt-2 p-2">
+                                <i class="fas fa-exclamation-circle"></i> {{ $message }}
+                            </div>
                             @enderror
 
                             <img width="150" height="120" id="previewProductImg"
@@ -48,7 +48,7 @@
 
 
 
-                      
+
 
                     </div>
 
@@ -57,18 +57,18 @@
                             <label>Gender</label>
                             <div class="form-row" style="display: flex; gap: 20px;">
                                 @foreach ($genders as $value => $label)
-                                    <div class="gender">
-                                        <input type="radio" id="gender_{{ $value }}" name="gender"
-                                            value="{{ $value }}" @checked($value == old('gender')) >
-                                        <label for="gender_{{ $value }}">{{ $label }}</label>
-                                    </div>
+                                <div class="gender">
+                                    <input type="radio" id="gender_{{ $value }}" name="gender"
+                                        value="{{ $value }}  @checked($value=old('gender'))" />
+                                    <label for="gender_{{ $value }}">{{ $label }}</label>
+                                </div>
                                 @endforeach
                             </div>
 
                             @error('gender')
-                                <div class="alert alert-danger mt-2 p-2">
-                                    <i class="fas fa-exclamation-circle"></i> {{ $message }}
-                                </div>
+                            <div class="alert alert-danger mt-2 p-2">
+                                <i class="fas fa-exclamation-circle"></i> {{ $message }}
+                            </div>
                             @enderror
 
                         </div>
@@ -82,9 +82,9 @@
                             <textarea name="description" class="form-input @error('description') is-invalid @enderror" placeholder="Description"
                                 cols="15" rows="1">{{ old('description') }}</textarea>
                             @error('description')
-                                <div class="alert alert-danger mt-2 p-2">
-                                    <i class="fas fa-exclamation-circle"></i> {{ $message }}
-                                </div>
+                            <div class="alert alert-danger mt-2 p-2">
+                                <i class="fas fa-exclamation-circle"></i> {{ $message }}
+                            </div>
                             @enderror
                         </div>
                     </div>
@@ -97,9 +97,9 @@
                                     <input type="number" name="price" value="{{ old('price') }}"
                                         class="form-input @error('price') is-invalid @enderror" />
                                     @error('price')
-                                        <div class="alert alert-danger mt-2 p-2">
-                                            <i class="fas fa-exclamation-circle"></i> {{ $message }}
-                                        </div>
+                                    <div class="alert alert-danger mt-2 p-2">
+                                        <i class="fas fa-exclamation-circle"></i> {{ $message }}
+                                    </div>
                                     @enderror
                                 </div>
                             </div>
@@ -113,9 +113,9 @@
                                     <input type="number" name="quantity" value="{{ old('quantity') }}"
                                         class="form-input @error('quantity') is-invalid @enderror" />
                                     @error('quantity')
-                                        <div class="alert alert-danger mt-2 p-2">
-                                            <i class="fas fa-exclamation-circle"></i> {{ $message }}
-                                        </div>
+                                    <div class="alert alert-danger mt-2 p-2">
+                                        <i class="fas fa-exclamation-circle"></i> {{ $message }}
+                                    </div>
                                     @enderror
                                 </div>
                             </div>
@@ -128,13 +128,13 @@
                                         class="form-input @error('category_id') is-invalid @enderror">
                                         <option value="">Select</option>
                                         @foreach ($categories as $category)
-                                            <option value="{{ $category->id }}" @selected($category->id == old('category_id'))>{{ $category->name }}</option>
+                                        <option value="{{ $category->id }}" @selected($category->id == old('category_id'))>{{ $category->name }}</option>
                                         @endforeach
                                     </select>
                                     @error('category_id')
-                                        <div class="alert alert-danger mt-2 p-2">
-                                            <i class="fas fa-exclamation-circle"></i> {{ $message }}
-                                        </div>
+                                    <div class="alert alert-danger mt-2 p-2">
+                                        <i class="fas fa-exclamation-circle"></i> {{ $message }}
+                                    </div>
                                     @enderror
 
                                 </div>
@@ -155,25 +155,25 @@
     </section>
 
     @push('scripts')
-        <script>
-            function showImg(event, previewId = 'previewProductImg') {
-                const file = event.target.files[0];
-                const preview = document.getElementById(previewId);
+    <script>
+        function showImg(event, previewId = 'previewProductImg') {
+            const file = event.target.files[0];
+            const preview = document.getElementById(previewId);
 
-                if (file) {
-                    const reader = new FileReader();
-                    reader.onload = function() {
-                        preview.src = reader.result;
-                        preview.style.display = 'block';
-                        preview.style.width = '150px';
-                        preview.style.maxHeight = '120px';
-                        preview.style.objectFit = 'contain';
-                    };
-                    reader.readAsDataURL(file);
-                } else {
-                    preview.style.display = 'none';
-                }
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function() {
+                    preview.src = reader.result;
+                    preview.style.display = 'block';
+                    preview.style.width = '150px';
+                    preview.style.maxHeight = '120px';
+                    preview.style.objectFit = 'contain';
+                };
+                reader.readAsDataURL(file);
+            } else {
+                preview.style.display = 'none';
             }
-        </script>
+        }
+    </script>
     @endpush
 </x-dashboard>

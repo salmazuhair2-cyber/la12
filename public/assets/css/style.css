@@ -5,13 +5,13 @@
     --header-color: #4a4a4a;
     --little-par: #ff2b2bdb;
     --section-padding: 70px;
-    --little-use-color: rgb(255, 234, 0);
+    --little-use-color: rgb(22, 22, 22);
     --transition-duration: 0.5s;
 
 
     --color-primary: var(--main-color);
   --color-danger: var(--little-par);
-  --color-success: #41f1b6;
+  --color-success: #2cc91e;
   --color-warning: var(--little-use-color);
   --color-info-dark: #7d8da1;
   --color-info-light: #dce1ed;
