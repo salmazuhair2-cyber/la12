@@ -91,14 +91,7 @@
             <h3>Coupons</h3>
         </a>
 
-        <a href="" class="menu-item">
-            <span class="material-icons-sharp"> attach_money </span>
-            <h3>Payments</h3>
-        </a>
-        <a href="" class="menu-item">
-            <span class="material-icons-sharp"> groups </span>
-            <h3>Customers</h3>
-        </a>
+
         <form id="logout-form" action="{{ route('admin.logout') }}" method="POST" style="display: inline;">
             @csrf
             <a href="#" class="menu-item" onclick="event.preventDefault(); this.closest('form').submit();">
@@ -107,17 +100,7 @@
             </a>
         </form>
 
-        {{-- Payments --}}
-        {{-- <a href="" class="menu-item">
-            <span class="material-icons-sharp"> attach_money </span>
-            <h3>Payments</h3>
-        </a> --}}
 
-        {{-- Customers --}}
-        {{-- <a href="#" class="menu-item">
-            <span class="material-icons-sharp"> groups </span>
-            <h3>Customers</h3>
-        </a> --}}
 
         {{-- Role --}}
         {{-- <a href="#" class="menu-item">

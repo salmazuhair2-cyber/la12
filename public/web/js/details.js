@@ -2032,7 +2032,7 @@ if (item) {
     }
 
     // تحديث totalPrice للسلة
-    let priceValue = parseFloat(item.price.replace("$", ""));
+    let priceValue = parseFloat(item.price.replace("₪", ""));
     shoppingCart.totalPrice = shoppingCart.items.reduce((total, item) => {
         return total + (parseFloat(item.price.replace("$", "")) * item.quantity);
     }, 0);

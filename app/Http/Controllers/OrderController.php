@@ -56,7 +56,7 @@ class OrderController extends Controller
         // حساب الخصم
         $discount = 0;
         $coupon   = session('coupon');
-        dd(session('coupon')); // ← أضيفيها فوق if ($coupon)
+
         if ($coupon) {
             $minOrder = $coupon['min_order'] ?? 0;
             if ($subtotal >= $minOrder) {
@@ -70,7 +70,7 @@ class OrderController extends Controller
         $total = $subtotal - $discount;
 
         try {
-            Log::info('Coupon session:', session('coupon') ?? []);
+
             DB::beginTransaction();
 
             $order = Order::create([

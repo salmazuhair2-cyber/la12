@@ -9,46 +9,28 @@ class CouponController extends Controller
 {
     public function apply(Request $request)
     {
-        $request->validate(['code' => 'required|string']);
+        $request->validate([
+            'code' => 'required|string',
+        ]);
 
         $coupon = Coupon::where('code', strtoupper($request->code))->first();
 
         if (!$coupon || !$coupon->isValid()) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Coupon "' . strtoupper($request->code) . '" is invalid or expired.'
-            ]);
+            return back()->with('coupon_error', 'Invalid or expired coupon code.');
         }
 
+        // احفظ الكوبون في الـ session
         session([
             'coupon' => [
-                'id'        => $coupon->id,
-                'code'      => $coupon->code,
-                'type'      => $coupon->type,
-                'value'     => $coupon->value,
+                'code'  => $coupon->code,
+                'type'  => $coupon->type,
+                'value' => $coupon->value,
                 'min_order' => $coupon->min_order,
+                'id'    => $coupon->id,
             ]
         ]);
 
-        // احسبي الخصم عشان نرجعه للـ JS
-        // بنحتاج السبتوتال — بنبعثه من الـ JS
-        $subtotal = $request->subtotal ?? 0;
-        $discount = 0;
-        if ($subtotal >= $coupon->min_order) {
-            if ($coupon->type === 'percentage') {
-                $discount = round($subtotal * ($coupon->value / 100), 2);
-            } else {
-                $discount = min($coupon->value, $subtotal);
-            }
-        }
-
-        return response()->json([
-            'success'  => true,
-            'message'  => 'Coupon "' . $coupon->code . '" applied!',
-            'code'     => $coupon->code,
-            'discount' => number_format($discount, 2),
-            'total'    => number_format($subtotal - $discount, 2),
-        ]);
+        return back()->with('coupon_success', 'Coupon applied successfully!');
     }
 
     public function remove()

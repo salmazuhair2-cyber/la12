@@ -216,40 +216,32 @@
         function submitCoupon() {
             const code = document.getElementById('coupon-input').value.trim();
             if (!code) return;
+            document.getElementById('coupon-code-hidden').value = code;
+            document.getElementById('apply-coupon-form').submit();
+        }
 
-            // خذي الـ subtotal من الصفحة
-            const subtotalText = document.getElementById('checkout-subtotal').innerText.replace('₪', '').replace(',', '');
-            const subtotal = parseFloat(subtotalText) || 0;
+        function togglePaymentInfo() {
+            const method = document.querySelector('input[name="payment_method"]:checked').value;
+            const box = document.getElementById('payment-info');
+            const instructions = document.getElementById('payment-instructions');
+            const transactionInput = document.getElementById('transaction_number');
 
-            fetch("{{ route('coupon.apply') }}", {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-                    },
-                    body: JSON.stringify({
-                        code: code,
-                        subtotal: subtotal
-                    })
-                })
-                .then(res => res.json())
-                .then(data => {
-                    if (data.success) {
-                        document.getElementById('coupon-success-msg').style.display = 'block';
-                        document.getElementById('coupon-success-msg').innerText = '✓ ' + data.message;
-                        document.getElementById('coupon-error-msg').style.display = 'none';
-                        document.getElementById('coupon-box').style.display = 'none';
-                        document.getElementById('discount-row').style.display = 'table-row';
-                        document.getElementById('discount-amount').innerText = '- ' + data.discount + '₪';
-                        document.getElementById('discount-code').innerText = 'Discount (' + data.code + ')';
-                        document.getElementById('checkout-total').innerText = data.total + '₪';
-                    } else {
-                        document.getElementById('coupon-error-msg').style.display = 'block';
-                        document.getElementById('coupon-error-msg').innerText = '✕ ' + data.message;
-                        document.getElementById('coupon-success-msg').style.display = 'none';
-                    }
-                });
+            if (method === 'cash') {
+                box.style.display = 'none';
+                transactionInput.removeAttribute('required');
+                transactionInput.value = '';
+                return;
+            }
+            box.style.display = 'block';
+            transactionInput.setAttribute('required', 'required');
+
+            if (method === 'mahwazti') {
+                instructions.innerHTML = 'حوّل المبلغ عبر محفظتي إلى الرقم: <strong>0590000000</strong> ثم أدخل رقم العملية.';
+            } else if (method === 'bank_of_palestine') {
+                instructions.innerHTML = 'حوّل المبلغ عبر تطبيق بنك فلسطين إلى الحساب: <strong>000000000</strong> ثم أدخل رقم العملية.';
+            } else if (method === 'arab_islamic_bank') {
+                instructions.innerHTML = 'حوّل المبلغ عبر تطبيق البنك العربي الإسلامي إلى الحساب: <strong>000000000</strong> ثم أدخل رقم العملية.';
+            }
         }
     </script>
-
 </x-site>
